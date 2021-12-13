@@ -34,16 +34,17 @@ const defaultState: TileState = {
 	tiles: [
 		{
 			name: 'Startpage',
-			searchString: 'https://startpage.com/sp/search?query=%s',
+			searchString: 'https://startpage.com/do/dsearch??query=%s',
 			useProxy: true,
 		},
 		{
 			name: 'Startpage search for Reddit',
-			searchString: 'https://google.com/search?igu=1&q=%s+reddit',
+			searchString: 'https://startpage.com/do/dsearch??query=%s+reddit',
 		},
 		{
 			name: 'Startpage search for HN',
-			searchString: 'https://google.com/search?igu=1&q=%s+hacker+news',
+			searchString:
+				'https://startpage.com/do/dsearch??query=%s+hacker+news',
 		},
 	],
 };
