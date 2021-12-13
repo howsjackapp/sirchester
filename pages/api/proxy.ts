@@ -29,8 +29,8 @@ export default function handler(
 				proxyRes.headers['content-security-policy'];
 			if (cspStr) {
 				const cspParsed = parseCsp(cspStr as string);
-				cspParsed['frame-ancestors'] = ['localhost'];
-				cspParsed['frame-src'] = ['localhost'];
+				cspParsed['frame-ancestors'] = ['localhost', '*.vercel.app'];
+				cspParsed['frame-src'] = ['localhost', '*.vercel.app'];
 
 				proxyRes.headers['Content-Security-Policy'] = Object.keys(
 					cspParsed
