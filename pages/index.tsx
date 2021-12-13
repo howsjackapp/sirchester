@@ -9,7 +9,11 @@ const Home: NextPage = () => {
 		event.preventDefault();
 
 		const formData = new FormData(event.currentTarget);
-		const q = formData.get('search').toString();
+		const q = formData.get('search')?.toString();
+
+		if (!q) {
+			return alert('Please enter a valid query.');
+		}
 
 		router.push(`/search?q=${q}`).catch(console.error);
 	};
