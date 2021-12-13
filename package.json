@@ -9,7 +9,7 @@
 		"lint": "tsc --noEmit && eslint . --ext js,ts"
 	},
 	"dependencies": {
-		"@blueprintjs/core": "^3.51.3",
+		"@blueprintjs/core": "^3.52.0",
 		"@blueprintjs/icons": "^3.31.0",
 		"@types/http-proxy": "^1.17.7",
 		"content-security-policy-parser": "^0.4.0",
