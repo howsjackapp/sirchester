@@ -9,7 +9,7 @@ const Home: NextPage = () => {
 		event.preventDefault();
 
 		const formData = new FormData(event.currentTarget);
-		const q = formData.get('search');
+		const q = formData.get('search').toString();
 
 		router.push(`/search?q=${q}`).catch(console.error);
 	};

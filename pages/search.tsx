@@ -50,7 +50,7 @@ const defaultState: TileState = {
 
 const Home: NextPage = () => {
 	const router = useRouter();
-	const [tileState, setTileState] = useState(defaultState);
+	const [tileState] = useState(defaultState);
 	const { q } = router.query;
 
 	if (!q || isArray(q)) {
