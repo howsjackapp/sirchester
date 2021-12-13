@@ -34,17 +34,21 @@ const defaultState: TileState = {
 	tiles: [
 		{
 			name: 'Startpage',
-			searchString: 'https://startpage.com/do/dsearch??query=%s',
+			searchString:
+				'https://startpage.com/do/dsearch?query=%s&cat=web&pl=ext-ff&language=english&extVersion=1.3.0',
 			useProxy: true,
 		},
 		{
 			name: 'Startpage search for Reddit',
-			searchString: 'https://startpage.com/do/dsearch??query=%s+reddit',
+			searchString:
+				'https://startpage.com/do/dsearch?query=%s+reddit&cat=web&pl=ext-ff&language=english&extVersion=1.3.0',
+			useProxy: true,
 		},
 		{
 			name: 'Startpage search for HN',
 			searchString:
-				'https://startpage.com/do/dsearch??query=%s+hacker+news',
+				'https://startpage.com/do/dsearch?query=%s+hacker+news&cat=web&pl=ext-ff&language=english&extVersion=1.3.0',
+			useProxy: true,
 		},
 	],
 };
