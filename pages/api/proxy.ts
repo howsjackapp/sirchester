@@ -1,3 +1,4 @@
+import parseCsp from 'content-security-policy-parser';
 import httpProxy from 'http-proxy';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -17,9 +18,26 @@ export default function handler(
 			proxyReq.path = parsed.toString();
 		});
 
+		// Allow embedding in iframe.
 		proxy.on('proxyRes', (proxyRes) => {
-			// Allow embedding in iframe.
+			// Update relevant headers.
 			proxyRes.headers['X-Frame-Options'] = 'ALLOWALL';
+
+			// Update relevant CSP.
+			const cspStr =
+				proxyRes.headers['Content-Security-Policy'] ||
+				proxyRes.headers['content-security-policy'];
+			if (cspStr) {
+				const cspParsed = parseCsp(cspStr as string);
+				cspParsed['frame-ancestors'] = ["'self'"];
+				cspParsed['frame-src'] = ["'self'"];
+
+				proxyRes.headers['Content-Security-Policy'] = Object.keys(
+					cspParsed
+				)
+					.map((k) => `${k} ${cspParsed[k].join(' ')}`)
+					.join('; ');
+			}
 		});
 
 		// Avoid the following error:

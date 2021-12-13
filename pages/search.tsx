@@ -34,23 +34,28 @@ const defaultState: TileState = {
 	tiles: [
 		{
 			name: 'Startpage',
-			searchString: 'https://startpage.com/sp/search?query=%s',
+			searchString:
+				'https://startpage.com/do/dsearch?query=%s&cat=web&pl=ext-ff&language=english&extVersion=1.3.0',
 			useProxy: true,
 		},
 		{
 			name: 'Startpage search for Reddit',
-			searchString: 'https://google.com/search?igu=1&q=%s+reddit',
+			searchString:
+				'https://startpage.com/do/dsearch?query=%s+reddit&cat=web&pl=ext-ff&language=english&extVersion=1.3.0',
+			useProxy: true,
 		},
 		{
 			name: 'Startpage search for HN',
-			searchString: 'https://google.com/search?igu=1&q=%s+hacker+news',
+			searchString:
+				'https://startpage.com/do/dsearch?query=%s+hacker+news&cat=web&pl=ext-ff&language=english&extVersion=1.3.0',
+			useProxy: true,
 		},
 	],
 };
 
 const Home: NextPage = () => {
 	const router = useRouter();
-	const [tileState, setTileState] = useState(defaultState);
+	const [tileState] = useState(defaultState);
 	const { q } = router.query;
 
 	if (!q || isArray(q)) {
