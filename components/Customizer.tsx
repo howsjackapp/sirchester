@@ -8,7 +8,7 @@ import {
 	Text,
 	useToasts,
 } from '@geist-ui/react';
-import { Save, X } from '@geist-ui/react-icons';
+import { Columns, RotateCcw, Save, X } from '@geist-ui/react-icons';
 import debug from 'debug';
 import { useRouter } from 'next/router';
 import React, { FC, useState } from 'react';
@@ -22,6 +22,7 @@ import {
 } from 'react-mosaic-component';
 
 import {
+	defaultTiles,
 	getSearchEngine,
 	getTileName,
 	isPreshippedTile,
@@ -76,6 +77,7 @@ export const Customizer: FC<CustomizerProps> = ({
 			text: 'Succesfully saved new tiles configuration.',
 			type: 'success',
 		});
+
 		return backToSearch();
 	}
 
@@ -110,21 +112,42 @@ export const Customizer: FC<CustomizerProps> = ({
 						onClick={backToSearch}
 						scale={0.25}
 						my="0.25rem"
+						type="abort"
 					>
 						Cancel
 					</Button>
+					<Spacer w={0.25} />
+					<Button
+						auto
+						icon={<RotateCcw />}
+						onClick={() => setWip(initialTileState)}
+						scale={0.25}
+						my="0.25rem"
+					>
+						Undo all
+					</Button>
+					<Spacer w={0.25} />
+					<Button
+						auto
+						icon={<Columns />}
+						onClick={() => setWip(defaultTiles)}
+						scale={0.25}
+						my="0.25rem"
+					>
+						Back to default
+					</Button>
+					<Spacer w={0.25} />
 					<Button
 						auto
 						icon={<Save />}
 						onClick={handleSave}
 						scale={0.25}
-						ml="0.25rem"
 						my="0.25rem"
 						type="success"
 					>
 						Save
 					</Button>
-					<Spacer w={1} />
+					<Spacer w={0.25} />
 				</div>
 			</div>
 			<Mosaic<number>

@@ -12,12 +12,10 @@ const LS_TILES_KEY = 'LS_TILES_KEY';
 
 type LSContextType = [TileState | null, (ts: TileState) => void];
 
-const LSContext = createContext<LSContextType>(
-	([] as unknown) as LSContextType
-);
+const LSContext = createContext<LSContextType>([] as unknown as LSContextType);
 
 export const LSWrapper: FC = ({ children }) => {
-	const [tiles, setTiles] = useState<TileState>(null);
+	const [tiles, setTiles] = useState<TileState | null>(null);
 
 	useEffect(() => {
 		const tilesStr =
@@ -41,7 +39,7 @@ export const LSWrapper: FC = ({ children }) => {
 	}, [tiles]);
 
 	return (
-		<LSContext.Provider value={[tiles as TileState, setTiles]}>
+		<LSContext.Provider value={[tiles, setTiles]}>
 			{children}
 		</LSContext.Provider>
 	);
