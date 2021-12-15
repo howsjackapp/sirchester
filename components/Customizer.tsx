@@ -3,13 +3,15 @@ import {
 	Card,
 	Description,
 	Image,
+	Link as GLink,
 	Select,
 	Spacer,
 	Text,
 	useToasts,
 } from '@geist-ui/react';
-import { Columns, RotateCcw, Save, X } from '@geist-ui/react-icons';
+import { Columns, Info, RotateCcw, Save, X } from '@geist-ui/react-icons';
 import debug from 'debug';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { FC, useState } from 'react';
 import {
@@ -99,13 +101,24 @@ export const Customizer: FC<CustomizerProps> = ({
 	return (
 		<>
 			<div className="flex space-between">
-				<div className="flex align-center">
+				<div className="flex align-center flex-grow-no-basis">
 					<Spacer w={1} />
+					<Link href="/">
+						<GLink>
+							<Text b small>
+								Multisearch
+							</Text>
+						</GLink>
+					</Link>
+				</div>
+				<div className="flex align-center">
+					<Info size={16} />
+					<Spacer w={0.5} />
 					<Text small>
 						Use this page to customize your search engines.
 					</Text>
 				</div>
-				<div className="flex">
+				<div className="flex flex-grow-no-basis justify-end">
 					<Button
 						auto
 						icon={<X />}
@@ -147,7 +160,7 @@ export const Customizer: FC<CustomizerProps> = ({
 					>
 						Save
 					</Button>
-					<Spacer w={0.25} />
+					<Spacer w={1} />
 				</div>
 			</div>
 			<Mosaic<number>
