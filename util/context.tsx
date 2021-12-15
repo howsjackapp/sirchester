@@ -10,10 +10,14 @@ import { defaultTiles, TileState } from './tiles';
 
 const LS_TILES_KEY = 'LS_TILES_KEY';
 
-const LSContext = createContext<TileState>({} as TileState);
+type LSContextType = [TileState | null, (ts: TileState) => void];
+
+const LSContext = createContext<LSContextType>(
+	([] as unknown) as LSContextType
+);
 
 export const LSWrapper: FC = ({ children }) => {
-	const [tiles, setTiles] = useState<TileState>(defaultTiles);
+	const [tiles, setTiles] = useState<TileState>(null);
 
 	useEffect(() => {
 		const tilesStr =
@@ -23,12 +27,26 @@ export const LSWrapper: FC = ({ children }) => {
 
 		if (tilesStr !== null) {
 			setTiles(JSON.parse(tilesStr) as TileState);
+		} else {
+			setTiles(defaultTiles);
 		}
 	}, []);
 
-	return <LSContext.Provider value={tiles}>{children}</LSContext.Provider>;
+	useEffect(() => {
+		if (!tiles) {
+			return;
+		}
+
+		localStorage.setItem(LS_TILES_KEY, JSON.stringify(tiles));
+	}, [tiles]);
+
+	return (
+		<LSContext.Provider value={[tiles as TileState, setTiles]}>
+			{children}
+		</LSContext.Provider>
+	);
 };
 
-export function useTileState(): TileState {
+export function useTileState(): LSContextType {
 	return useContext(LSContext);
 }

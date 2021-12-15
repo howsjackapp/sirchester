@@ -6,6 +6,10 @@ body,
 	margin: 0;
 }
 
+iframe {
+	border: 0;
+}
+
 /**
  * Hack to not show toolbars on mosaic
  */

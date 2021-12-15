@@ -9,11 +9,15 @@ import { getSearchEngine, getTileName, Tile } from '../util/tiles';
 
 const Search: NextPage = () => {
 	const router = useRouter();
-	const tileState = useTileState();
+	const [tileState] = useTileState();
 	const { q } = router.query;
 
 	if (!q || isArray(q)) {
 		return <p>Please add a ?q=</p>;
+	}
+
+	if (!tileState) {
+		return <p>loading...</p>;
 	}
 
 	return (

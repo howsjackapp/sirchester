@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { CssBaseline } from '@geist-ui/react';
 import Document, {
 	DocumentContext,
@@ -9,10 +11,12 @@ import Document, {
 } from 'next/document';
 import React from 'react';
 
+// @ts-ignore
 export default class extends Document {
 	static async getInitialProps(
 		ctx: DocumentContext
 	): Promise<DocumentInitialProps> {
+		// @ts-ignore
 		const initialProps = await Document.getInitialProps(ctx);
 		const styles = CssBaseline.flush(); // eslint-disable-line
 

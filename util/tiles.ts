@@ -21,10 +21,10 @@ export type Tile = PreshippedTile | CustomTile;
 
 export type TileMap = Record<number, Tile>;
 
-export type TileState = {
+export interface TileState {
 	currentNode: MosaicNode<number> | null;
 	tiles: TileMap;
-};
+}
 
 export const preShippedTiles = {
 	google: {

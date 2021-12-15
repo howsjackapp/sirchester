@@ -1,6 +1,5 @@
 .eslintrc.js
 next.config.js
 **/coverage/*
-**/examples/*
 **/lib/*
 **/node_modules/*
