@@ -1,6 +1,8 @@
 import { MosaicNode } from 'react-mosaic-component';
 
 export interface SearchEngine {
+	description: string;
+	image?: string;
 	name: string;
 	searchString: string;
 	useProxy?: boolean;
@@ -26,30 +28,42 @@ export type TileState = {
 
 export const preShippedTiles = {
 	google: {
+		description: 'Default Google search',
+		image: '/searchengines/google.svg',
 		name: 'Google',
 		searchString: 'https://google.com/search?igu=1&q=%s',
 	},
 	googleReddit: {
+		description: 'Default Google search, but append "reddit"',
+		image: '/searchengines/google.svg',
 		name: 'Google search for Reddit',
 		searchString: 'https://google.com/search?igu=1&q=%s+reddit',
 	},
 	googleHn: {
+		description: 'Default Google search, but append "hacker news"',
+		image: '/searchengines/google.svg',
 		name: 'Google search for HN',
 		searchString: 'https://google.com/search?igu=1&q=%s+hacker+news',
 	},
 	startpage: {
+		description: 'Default Startpage search',
+		image: '/searchengines/startpage.svg',
 		name: 'Startpage',
 		searchString:
 			'https://startpage.com/do/dsearch?query=%s&cat=web&pl=ext-ff&language=english&extVersion=1.3.0',
 		useProxy: true,
 	},
 	startpageReddit: {
+		description: 'Default Startpage search, but append "reddit"',
+		image: '/searchengines/startpage.svg',
 		name: 'Startpage search for Reddit',
 		searchString:
 			'https://startpage.com/do/dsearch?query=%s+reddit&cat=web&pl=ext-ff&language=english&extVersion=1.3.0',
 		useProxy: true,
 	},
 	startpageHn: {
+		description: 'Default Startpage search, but append "hacker news"',
+		image: '/searchengines/startpage.svg',
 		name: 'Startpage search for HN',
 		searchString:
 			'https://startpage.com/do/dsearch?query=%s+hacker+news&cat=web&pl=ext-ff&language=english&extVersion=1.3.0',
@@ -77,9 +91,7 @@ export const defaultTiles: TileState = {
 };
 
 export function getTileName(tile: Tile): string {
-	return tile.type === 'PRESHIPPED'
-		? preShippedTiles[tile.id].name
-		: tile.name;
+	return getSearchEngine(tile).name;
 }
 
 export function isPreshippedTile(tile: Tile): tile is PreshippedTile {

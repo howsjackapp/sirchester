@@ -12,3 +12,20 @@ body,
 .no-toolbar .mosaic-window-toolbar {
 	display: none;
 }
+
+.align-center {
+	align-items: center;
+}
+
+.flex {
+	display: flex;
+}
+
+.space-between {
+	justify-content: space-between;
+}
+
+.margin-auto {
+	margin-left: auto !important;
+	margin-right: auto !important;
+}

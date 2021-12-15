@@ -12,6 +12,7 @@
 		"@blueprintjs/core": "^3.52.0",
 		"@blueprintjs/icons": "^3.31.0",
 		"@geist-ui/react": "^2.2.0",
+		"@geist-ui/react-icons": "^1.0.1",
 		"@types/http-proxy": "^1.17.7",
 		"content-security-policy-parser": "^0.4.0",
 		"http-proxy": "^1.18.1",
