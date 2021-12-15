@@ -40,6 +40,10 @@ export default function handler(
 			}
 		});
 
+		// Fix warning message:
+		// "API resolved without sending a response for /api/proxy?q=..."
+		proxy.on('end', () => res.end());
+
 		// Avoid the following error:
 		// "Error [ERR_TLS_CERT_ALTNAME_INVALID]: Hostname/IP does not match certificate's altnames"
 		req.headers['host'] = parsed.host || undefined;

@@ -5,3 +5,10 @@ body,
 	width: 100%;
 	margin: 0;
 }
+
+/**
+ * Hack to not show toolbars on mosaic
+ */
+.no-toolbar .mosaic-window-toolbar {
+	display: none;
+}
