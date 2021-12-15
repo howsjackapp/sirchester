@@ -1,3 +1,4 @@
+import { Input, Page } from '@geist-ui/react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React, { FormEventHandler } from 'react';
@@ -15,17 +16,23 @@ const Home: NextPage = () => {
 			return alert('Please enter a valid query.');
 		}
 
-		router.push(`/search?q=${q}`).catch(console.error);
+		router.push(`/search?q=${q}`).catch(alert);
 	};
 
 	return (
-		<>
-			<h1>HomePage</h1>
-			<form onSubmit={handleSubmit}>
-				<input name="search" placeholder="Enter your query" />
-				<button>Search</button>
-			</form>
-		</>
+		<Page>
+			<Page.Content>
+				<h1>Multisearch</h1>
+				<form onSubmit={handleSubmit}>
+					<Input
+						name="search"
+						placeholder="Enter your query"
+						width="100%"
+					/>
+					<button>Search</button>
+				</form>
+			</Page.Content>
+		</Page>
 	);
 };
 

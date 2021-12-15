@@ -74,7 +74,7 @@ export const Customizer: FC<CustomizerProps> = ({
 		onSetTileState(wip);
 		setToast({
 			delay: 3000,
-			text: 'Succesfully saved new tiles configuration.',
+			text: 'Successfully saved new configuration.',
 			type: 'success',
 		});
 
@@ -152,7 +152,10 @@ export const Customizer: FC<CustomizerProps> = ({
 			</div>
 			<Mosaic<number>
 				onChange={(newNode) => {
-					newNode && setWip(cleanWip(newNode, wip.tiles));
+					if (newNode) {
+						const cleaned = cleanWip(newNode, wip.tiles);
+						setWip(cleaned);
+					}
 				}}
 				renderTile={(id, path) => {
 					const tile = wip.tiles[id];

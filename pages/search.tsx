@@ -49,7 +49,7 @@ const Search: NextPage = () => {
 				text="Click to edit the layout"
 				type="secondary"
 			>
-				<Link href={`/customize?q=${q}`}>
+				<Link href={`/customize?q=${q}`} replace={false}>
 					<Button
 						auto
 						icon={<Edit />}
