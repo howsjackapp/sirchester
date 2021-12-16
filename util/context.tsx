@@ -6,13 +6,16 @@ import React, {
 	useState,
 } from 'react';
 
-import { defaultTiles, TileState } from './tiles';
+import { gallery } from './gallery';
+import { TileState } from './tiles';
 
 const LS_TILES_KEY = 'LS_TILES_KEY';
 
 type LSContextType = [TileState | null, (ts: TileState) => void];
 
-const LSContext = createContext<LSContextType>([] as unknown as LSContextType);
+const LSContext = createContext<LSContextType>(
+	([] as unknown) as LSContextType
+);
 
 export const LSWrapper: FC = ({ children }) => {
 	const [tiles, setTiles] = useState<TileState | null>(null);
@@ -26,7 +29,7 @@ export const LSWrapper: FC = ({ children }) => {
 		if (tilesStr !== null) {
 			setTiles(JSON.parse(tilesStr) as TileState);
 		} else {
-			setTiles(defaultTiles);
+			setTiles(gallery.googleTrio);
 		}
 	}, []);
 

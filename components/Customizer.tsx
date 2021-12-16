@@ -9,7 +9,7 @@ import {
 	Text,
 	useToasts,
 } from '@geist-ui/react';
-import { Columns, Info, RotateCcw, Save, X } from '@geist-ui/react-icons';
+import { Info, RotateCcw, Save, X } from '@geist-ui/react-icons';
 import debug from 'debug';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -24,14 +24,14 @@ import {
 } from 'react-mosaic-component';
 
 import {
-	defaultTiles,
+	gallery,
 	getSearchEngine,
 	getTileName,
 	isPreshippedTile,
-	preShippedTiles,
+	preShippedSearchEngines,
 	TileMap,
 	TileState,
-} from '../util/tiles';
+} from '../util';
 
 const l = debug('multisearch:customize');
 
@@ -55,8 +55,8 @@ export const Customizer: FC<CustomizerProps> = ({
 
 	function handleChangeTile(leafId: number) {
 		return function (newValue: string | string[]): void {
-			const v = newValue as keyof typeof preShippedTiles;
-			if (preShippedTiles[v]) {
+			const v = newValue as keyof typeof preShippedSearchEngines;
+			if (preShippedSearchEngines[v]) {
 				setWip({
 					...wip,
 					tiles: {
@@ -115,7 +115,8 @@ export const Customizer: FC<CustomizerProps> = ({
 					<Info size={16} />
 					<Spacer w={0.5} />
 					<Text small>
-						Use this page to customize your search engines.
+						Use this page to customize your search engines like a
+						tiling window manager.
 					</Text>
 				</div>
 				<div className="flex flex-grow-no-basis justify-end">
@@ -140,15 +141,18 @@ export const Customizer: FC<CustomizerProps> = ({
 						Undo all
 					</Button>
 					<Spacer w={0.25} />
-					<Button
-						auto
-						icon={<Columns />}
-						onClick={() => setWip(defaultTiles)}
-						scale={0.25}
+					<Select
+						placeholder="Choose from gallery"
 						my="0.25rem"
+						onChange={(v) => setWip(gallery[v as string])}
+						scale={0.4}
 					>
-						Back to default
-					</Button>
+						{Object.keys(gallery).map((o) => (
+							<Select.Option key={o} value={o}>
+								{gallery[o].name}
+							</Select.Option>
+						))}
+					</Select>
 					<Spacer w={0.25} />
 					<Button
 						auto
@@ -166,7 +170,7 @@ export const Customizer: FC<CustomizerProps> = ({
 			<Mosaic<number>
 				onChange={(newNode) => {
 					if (newNode) {
-						const cleaned = cleanWip(newNode, wip.tiles);
+						const cleaned = cleanWip(newNode, wip);
 						setWip(cleaned);
 					}
 				}}
@@ -216,20 +220,17 @@ export const Customizer: FC<CustomizerProps> = ({
 										}
 										width="100%"
 									>
-										{Object.keys(preShippedTiles).map(
-											(k) => (
-												<Select.Option
-													key={k}
-													value={k}
-												>
-													{
-														preShippedTiles[
-															k as keyof typeof preShippedTiles
-														].name
-													}
-												</Select.Option>
-											)
-										)}
+										{Object.keys(
+											preShippedSearchEngines
+										).map((k) => (
+											<Select.Option key={k} value={k}>
+												{
+													preShippedSearchEngines[
+														k as keyof typeof preShippedSearchEngines
+													].name
+												}
+											</Select.Option>
+										))}
 										<Select.Option disabled value="custom">
 											Custom Search Engine (Coming
 											soon...)
@@ -263,12 +264,12 @@ function getNextId(tiles: TileMap): number {
 /**
  * Parse all nodes in the WIP state, and remove all unnecessary tiles.
  */
-function cleanWip(node: MosaicNode<number>, tiles: TileMap): TileState {
+function cleanWip(node: MosaicNode<number>, tiles: TileState): TileState {
 	const leaves = getLeaves(node);
 
 	// Delete all tiles that are not leaves in the tree.
 	const remainingTiles = leaves.reduce((acc, leafId) => {
-		acc[leafId] = tiles[leafId];
+		acc[leafId] = tiles.tiles[leafId];
 		return acc;
 	}, {} as TileMap);
 
@@ -277,6 +278,7 @@ function cleanWip(node: MosaicNode<number>, tiles: TileMap): TileState {
 	}
 
 	return {
+		...tiles,
 		currentNode: node,
 		tiles: remainingTiles,
 	};

@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import Head from 'next/head';
 import React from 'react';
 
 import { Customizer } from '../components/Customizer';
@@ -12,10 +13,15 @@ const Customize: NextPage = () => {
 	}
 
 	return (
-		<Customizer
-			initialTileState={tileState}
-			onSetTileState={setTileState}
-		/>
+		<>
+			<Head>
+				<title>Customize - Multisearch</title>
+			</Head>
+			<Customizer
+				initialTileState={tileState}
+				onSetTileState={setTileState}
+			/>
+		</>
 	);
 };
 
