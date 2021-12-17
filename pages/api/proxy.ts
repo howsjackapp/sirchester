@@ -2,6 +2,8 @@ import parseCsp from 'content-security-policy-parser';
 import httpProxy from 'http-proxy';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+const proxy = httpProxy.createProxyServer();
+
 export default function handler(
 	req: NextApiRequest,
 	res: NextApiResponse
@@ -9,8 +11,6 @@ export default function handler(
 	try {
 		const url = decodeURIComponent(req.query.q as string);
 		const parsed = new URL(url);
-
-		const proxy = httpProxy.createProxyServer();
 
 		// Fix URLs and query params forwarding.
 		// https://stackoverflow.com/questions/55285448/node-http-proxy-how-to-pass-new-query-parameters-to-initial-request

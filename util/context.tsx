@@ -6,7 +6,8 @@ import React, {
 	useState,
 } from 'react';
 
-import { defaultTiles, TileState } from './tiles';
+import { gallery } from './gallery';
+import { TileState } from './tiles';
 
 const LS_TILES_KEY = 'LS_TILES_KEY';
 
@@ -26,7 +27,7 @@ export const LSWrapper: FC = ({ children }) => {
 		if (tilesStr !== null) {
 			setTiles(JSON.parse(tilesStr) as TileState);
 		} else {
-			setTiles(defaultTiles);
+			setTiles(gallery.googleTrio);
 		}
 	}, []);
 

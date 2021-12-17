@@ -21,8 +21,25 @@ iframe {
 	align-items: center;
 }
 
+.container {
+	max-width: 640px !important;
+}
+
 .flex {
 	display: flex;
+}
+
+.flex-grow-no-basis {
+	flex-grow: 1;
+	flex-basis: 0;
+}
+
+.justify-center {
+	justify-content: center;
+}
+
+.justify-end {
+	justify-content: end;
 }
 
 .space-between {
@@ -32,4 +49,8 @@ iframe {
 .margin-auto {
 	margin-left: auto !important;
 	margin-right: auto !important;
+}
+
+.text-center {
+	text-align: center;
 }

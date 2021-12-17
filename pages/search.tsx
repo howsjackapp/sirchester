@@ -1,6 +1,7 @@
 import { Button, Tooltip } from '@geist-ui/react';
 import { Edit } from '@geist-ui/react-icons';
 import type { NextPage } from 'next';
+import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -26,6 +27,9 @@ const Search: NextPage = () => {
 
 	return (
 		<>
+			<Head>
+				<title>{q} - Multisearch</title>
+			</Head>
 			<Mosaic<number>
 				renderTile={(id, path) => (
 					<MosaicWindow<number>
@@ -49,7 +53,7 @@ const Search: NextPage = () => {
 				text="Click to edit the layout"
 				type="secondary"
 			>
-				<Link href={`/customize?q=${q}`}>
+				<Link href={`/customize?q=${q}`} replace={false}>
 					<Button
 						auto
 						icon={<Edit />}
