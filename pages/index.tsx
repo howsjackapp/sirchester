@@ -1,4 +1,13 @@
-import { Button, Input, Link, Page, Spacer, Text } from '@geist-ui/react';
+import {
+	Button,
+	Display,
+	Image,
+	Input,
+	Link,
+	Page,
+	Spacer,
+	Text,
+} from '@geist-ui/react';
 import { Search } from '@geist-ui/react-icons';
 import type { NextPage } from 'next';
 import Head from 'next/head';
@@ -8,8 +17,10 @@ import React, { FormEventHandler, useState } from 'react';
 const Home: NextPage = () => {
 	const router = useRouter();
 	const [q, setQ] = useState('');
+	const [loading, setLoading] = useState(false);
 
 	const handleSubmit: FormEventHandler<unknown> = (event) => {
+		setLoading(true);
 		event.preventDefault();
 
 		if (!q) {
@@ -27,25 +38,48 @@ const Home: NextPage = () => {
 			<Page className="container">
 				<Page.Content>
 					<h1>Multisearch</h1>
-					<p>Multi-query multi-engine search. Fully customizable.</p>
+					<p>
+						Multisearch appends &quot;reddit&quot; or &quot;hacker
+						news&quot; to your search queries.
+						<br />
+						Then displays results as a tiling window manager.
+					</p>
 					<form onSubmit={handleSubmit}>
 						<Input
 							autoFocus
 							icon={<Search />}
 							name="search"
 							onChange={(v) => setQ(v.target.value)}
+							placeholder='Try "best burger paris"'
 							value={q}
 							width="100%"
 						/>
 						<Spacer h={1} />
 						<div className="flex justify-center">
-							<Button onClick={handleSubmit} type="secondary">
+							<Button
+								disabled={loading}
+								loading={loading}
+								onClick={handleSubmit}
+								type="secondary"
+							>
 								Search
 							</Button>
 						</div>
 					</form>
 
-					<Spacer h={15} />
+					<Spacer h={10} />
+					<h2>Example with &quot;best burger paris&quot;</h2>
+					<Display
+						caption='Startpage results, with "reddit" and "hacker news"'
+						shadow
+					>
+						<Image.Browser
+							url="https://multisearch.vercel.app/search?q=best burger paris"
+							anchorProps={{ rel: 'nofollow' }}
+						>
+							<Image src="/screenshot-best-burger-paris.png" />
+						</Image.Browser>
+					</Display>
 					<h2>Why?</h2>
 					<p>
 						Because Google results have been spammy and useless
