@@ -80,6 +80,7 @@ const Home: NextPage = () => {
 							<Image src="/screenshot-best-burger-paris.png" />
 						</Image.Browser>
 					</Display>
+
 					<h2>Why?</h2>
 					<p>
 						Because Google results have been spammy and useless
