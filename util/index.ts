@@ -1,2 +1,2 @@
-export * from './gallery';
 export * from './tiles';
+export * from './tiles/tiles';

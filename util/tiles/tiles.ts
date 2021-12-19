@@ -1,13 +1,17 @@
 import { MosaicNode } from 'react-mosaic-component';
 
-import { preShippedSearchEngines } from './gallery/searchengines';
+import { preShippedSearchEngines } from './searchengines';
 
 export interface SearchEngine {
 	description: string;
 	image?: string;
 	name: string;
 	searchString: string;
-	useProxy?: boolean;
+	proxy?: SearchEngineProxy;
+}
+
+export interface SearchEngineProxy {
+	addIncomingHeaders: [string, string][];
 }
 
 export interface PreshippedTile {

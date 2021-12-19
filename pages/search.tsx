@@ -9,7 +9,7 @@ import { Mosaic, MosaicWindow } from 'react-mosaic-component';
 import { isArray } from 'util';
 
 import { useTileState } from '../util/context';
-import { getSearchEngine, getTileName, Tile } from '../util/tiles';
+import { getSearchEngine, getTileName, Tile } from '../util/tiles/tiles';
 import styles from './search.module.css';
 
 const Search: NextPage = () => {
@@ -77,8 +77,10 @@ function getIframeUrl(tile: Tile, query: string): string {
 		throw new Error('url is empty in getIframeUrl');
 	}
 
-	if (se.useProxy) {
-		return `/api/proxy?q=${encodeURIComponent(url)}`;
+	if (se.proxy) {
+		return `https://multisearch-proxy.vercel.app/?__multisearch_target=${encodeURIComponent(
+			url
+		)}`;
 	}
 
 	return url;

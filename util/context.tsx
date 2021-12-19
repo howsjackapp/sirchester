@@ -6,8 +6,8 @@ import React, {
 	useState,
 } from 'react';
 
-import { gallery } from './gallery';
-import { TileState } from './tiles';
+import { gallery } from './tiles';
+import { TileState } from './tiles/tiles';
 
 const LS_TILES_KEY = 'LS_TILES_KEY';
 
