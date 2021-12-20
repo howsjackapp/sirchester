@@ -4,21 +4,21 @@ export const preShippedSearchEngines = {
 		image: '/searchengines/ddg.svg',
 		name: 'DuckDuckGo',
 		searchString: 'https://duckduckgo.com/?q=%s&ia=web',
-		useProxy: true,
+		proxy: {},
 	},
 	ddgReddit: {
 		description: 'Default DuckDuckGo search, but append "reddit"',
 		image: '/searchengines/ddg.svg',
 		name: 'DuckDuckGo search for Reddit',
 		searchString: 'https://duckduckgo.com/?q=%s+reddit&ia=web',
-		useProxy: true,
+		proxy: {},
 	},
 	ddgHn: {
 		description: 'Default DuckDuckGo search, but append "hacker news"',
 		image: '/searchengines/ddg.svg',
 		name: 'DuckDuckGo search for HN',
 		searchString: 'https://duckduckgo.com/?q=%s+hacker+news&ia=web',
-		useProxy: true,
+		proxy: {},
 	},
 	google: {
 		description: 'Default Google search',
@@ -44,7 +44,7 @@ export const preShippedSearchEngines = {
 		name: 'Startpage',
 		searchString:
 			'https://startpage.com/do/dsearch?query=%s&cat=web&pl=ext-ff&language=english&extVersion=1.3.0',
-		useProxy: true,
+		proxy: {},
 	},
 	startpageReddit: {
 		description: 'Default Startpage search, but append "reddit"',
@@ -52,7 +52,7 @@ export const preShippedSearchEngines = {
 		name: 'Startpage search for Reddit',
 		searchString:
 			'https://startpage.com/do/dsearch?query=%s+reddit&cat=web&pl=ext-ff&language=english&extVersion=1.3.0',
-		useProxy: true,
+		proxy: {},
 	},
 	startpageHn: {
 		description: 'Default Startpage search, but append "hacker news"',
@@ -60,6 +60,6 @@ export const preShippedSearchEngines = {
 		name: 'Startpage search for HN',
 		searchString:
 			'https://startpage.com/do/dsearch?query=%s+hacker+news&cat=web&pl=ext-ff&language=english&extVersion=1.3.0',
-		useProxy: true,
+		proxy: {},
 	},
 };

@@ -1,4 +1,4 @@
-import type { TileState } from '../tiles';
+import type { TileState } from './tiles';
 
 export const gallery: Record<string, TileState> = {
 	ddgTrio: {

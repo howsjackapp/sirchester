@@ -7,6 +7,7 @@ import {
 	Select,
 	Spacer,
 	Text,
+	Tooltip,
 	useToasts,
 } from '@geist-ui/react';
 import { Info, RotateCcw, Save, X } from '@geist-ui/react-icons';
@@ -33,7 +34,7 @@ import {
 	TileState,
 } from '../util';
 
-const l = debug('multisearch:customize');
+const l = debug('sirchester:customize');
 
 interface CustomizerProps {
 	initialTileState: TileState;
@@ -106,13 +107,20 @@ export const Customizer: FC<CustomizerProps> = ({
 					<Link href="/">
 						<GLink>
 							<Text b small>
-								Multisearch
+								Sir Chester
 							</Text>
 						</GLink>
 					</Link>
 				</div>
 				<div className="flex align-center">
-					<Info size={16} />
+					<Tooltip
+						text="Help tutorials coming soon! Sorry."
+						placement="bottom"
+						type="dark"
+					>
+						<Info size={16} />
+					</Tooltip>
+
 					<Spacer w={0.5} />
 					<Text small>
 						Use this page to customize your search engines like a

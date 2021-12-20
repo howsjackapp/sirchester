@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import React from 'react';
 
-import { Customizer } from '../components/Customizer';
+import { Customizer, Footer } from '../components';
 import { useTileState } from '../util/context';
 
 const Customize: NextPage = () => {
@@ -15,12 +15,13 @@ const Customize: NextPage = () => {
 	return (
 		<>
 			<Head>
-				<title>Customize - Multisearch</title>
+				<title>Customize - Sir Chester</title>
 			</Head>
 			<Customizer
 				initialTileState={tileState}
 				onSetTileState={setTileState}
 			/>
+			<Footer />
 		</>
 	);
 };
