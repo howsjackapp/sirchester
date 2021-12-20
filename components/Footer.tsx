@@ -50,12 +50,15 @@ export function Footer(): React.ReactElement {
 						width={24}
 					/>{' '}
 					made by{' '}
-					<a
+					<Link
+						color
 						href="https://www.flaticon.com/authors/gregor-cresnar"
-						title="Gregor Cresnar"
+						icon
+						target="_blank"
+						rel="noreferrer"
 					>
 						Gregor Cresnar
-					</a>
+					</Link>
 					.
 				</p>
 				<a
