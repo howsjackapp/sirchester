@@ -1,4 +1,5 @@
-import React from 'react';
+import { Loading } from '@geist-ui/react';
+import React, { useEffect, useState } from 'react';
 import { MosaicBranch, MosaicWindow } from 'react-mosaic-component';
 
 import { getSearchEngine, getTileName, Tile, TileState } from '../util';
@@ -19,6 +20,12 @@ export function Tile({
 	q,
 	tileState,
 }: TileProps): React.ReactElement {
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		setTimeout(() => setLoading(false), 500);
+	});
+
 	return (
 		<MosaicWindow<number>
 			className="no-toolbar"
@@ -26,8 +33,10 @@ export function Tile({
 			path={path}
 			title={getTileName(tileState.tiles[id])}
 		>
+			{loading && <Loading />}
 			<iframe
-				className="full-width full-height"
+				className={`full-width full-height ${loading ? 'hide' : ''}`}
+				onLoad={() => setLoading(false)}
 				src={getIframeUrl(tileState.tiles[id], q)}
 			/>
 		</MosaicWindow>
