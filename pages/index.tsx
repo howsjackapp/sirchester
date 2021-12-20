@@ -88,8 +88,6 @@ const Home: NextPage = () => {
 					<p>
 						Sir Chester appends &quot;reddit&quot; or &quot;hacker
 						news&quot; to your search queries.
-						<br />
-						Then displays results as a tiling window manager.
 					</p>
 					<Spacer h={2} />
 					<form onSubmit={handleSubmit}>
