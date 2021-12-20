@@ -11,7 +11,7 @@ iframe {
 }
 
 /**
- * Hack to not show toolbars on mosaic
+ * Hack to hide toolbars on mosaic windows.
  */
 .no-toolbar .mosaic-window-toolbar {
 	display: none;
