@@ -25,6 +25,10 @@ iframe {
 	max-width: 640px !important;
 }
 
+.hide {
+	display: none;
+}
+
 .flex {
 	display: flex;
 }
@@ -32,6 +36,14 @@ iframe {
 .flex-grow-no-basis {
 	flex-grow: 1;
 	flex-basis: 0;
+}
+
+.full-width {
+	width: 100%;
+}
+
+.full-height {
+	height: 100%;
 }
 
 .justify-center {
