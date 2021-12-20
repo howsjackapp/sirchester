@@ -11,10 +11,12 @@ import {
 import { Search } from '@geist-ui/react-icons';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import NextImage from 'next/image';
 import { useRouter } from 'next/router';
 import React, { FormEventHandler, useState } from 'react';
 
 import { Footer } from '../components';
+import styles from './index.module.css';
 
 const Home: NextPage = () => {
 	const router = useRouter();
@@ -74,7 +76,15 @@ const Home: NextPage = () => {
 			</Head>
 			<Page className="container">
 				<Page.Content>
-					<h1>Sir Chester</h1>
+					<h1>
+						<NextImage
+							className={styles.logo}
+							height={40}
+							src="/logo/moustache-128.png"
+							width={40}
+						/>{' '}
+						Sir Chester
+					</h1>
 					<p>
 						Sir Chester appends &quot;reddit&quot; or &quot;hacker
 						news&quot; to your search queries.

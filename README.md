@@ -34,3 +34,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 [![powered-by-vercel](./public/powered-by-vercel.svg)](https://vercel.com?utm_source=SirChesterApp&utm_campaign=oss)
+
+## Credits
+
+<div>Moustache logo made by <a href="https://www.flaticon.com/authors/gregor-cresnar" title="Gregor Cresnar">Gregor Cresnar</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>

@@ -35,6 +35,11 @@ export default class extends Document {
 		return (
 			<Html>
 				<Head>
+					<link
+						rel="shortcut icon"
+						href="/favicon.png"
+						type="image/x-icon"
+					/>
 					<script
 						async
 						src="https://scripts.simpleanalyticscdn.com/latest.js"

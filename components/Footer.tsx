@@ -1,4 +1,5 @@
 import { Link, Spacer } from '@geist-ui/react';
+import Image from 'next/image';
 import React from 'react';
 
 export function Footer(): React.ReactElement {
@@ -41,6 +42,21 @@ export function Footer(): React.ReactElement {
 						@amaurym
 					</Link>{' '}
 					2022.
+					<br />
+					Moustache logo{' '}
+					<Image
+						height={24}
+						src="/logo/moustache-64.png"
+						width={24}
+					/>{' '}
+					made by{' '}
+					<a
+						href="https://www.flaticon.com/authors/gregor-cresnar"
+						title="Gregor Cresnar"
+					>
+						Gregor Cresnar
+					</a>
+					.
 				</p>
 				<a
 					href="https://vercel.com?utm_source=SirChesterApp&utm_campaign=oss"

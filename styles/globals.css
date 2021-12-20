@@ -46,6 +46,10 @@ iframe {
 	height: 100%;
 }
 
+.inline {
+	display: inline !important;
+}
+
 .justify-center {
 	justify-content: center;
 }
