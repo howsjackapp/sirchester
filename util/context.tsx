@@ -27,7 +27,7 @@ export const LSWrapper: FC = ({ children }) => {
 		if (tilesStr !== null) {
 			setTiles(JSON.parse(tilesStr) as TileState);
 		} else {
-			setTiles(gallery.googleTrio);
+			setTiles(gallery.ddgTrio);
 		}
 	}, []);
 

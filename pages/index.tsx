@@ -116,7 +116,7 @@ const Home: NextPage = () => {
 					</form>
 
 					<Spacer h={10} />
-					<h2>Example with &quot;burger paris&quot;</h2>
+					<h2>Example with &quot;best burger paris&quot;</h2>
 					<Display
 						caption='Startpage results, with "reddit" and "hacker news"'
 						shadow
@@ -177,6 +177,7 @@ const Home: NextPage = () => {
 						<Link
 							color
 							href="https://news.ycombinator.com/item?id=23208357"
+							icon
 							target="_blank"
 							rel="noreferrer"
 						>
@@ -186,6 +187,7 @@ const Home: NextPage = () => {
 						<Link
 							color
 							href="https://news.ycombinator.com/item?id=27390626"
+							icon
 							target="_blank"
 							rel="noreferrer"
 						>
@@ -195,6 +197,7 @@ const Home: NextPage = () => {
 						<Link
 							color
 							href="https://news.ycombinator.com/item?id=28903723"
+							icon
 							target="_blank"
 							rel="noreferrer"
 						>
