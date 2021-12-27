@@ -37,7 +37,7 @@ function Search({ tileState }: SearchProps): React.ReactElement | null {
 			/>
 			<Popover
 				className={styles.fab}
-				content={popoverContent}
+				content={popoverContentWithQ(q)}
 				placement="topStart"
 				trigger="hover"
 			>
@@ -47,16 +47,20 @@ function Search({ tileState }: SearchProps): React.ReactElement | null {
 	);
 }
 
-const popoverContent = () => (
-	<>
-		<Popover.Item title>Sir Chester</Popover.Item>
-		<Popover.Item>
-			<Link href="/">Homepage</Link>
-		</Popover.Item>
-		<Popover.Item>
-			<Link href="/customize">Customize search</Link>
-		</Popover.Item>
-	</>
-);
+function popoverContentWithQ(q: string): () => React.ReactElement {
+	const popoverContent = () => (
+		<>
+			<Popover.Item title>Sir Chester</Popover.Item>
+			<Popover.Item>
+				<Link href="/">Homepage</Link>
+			</Popover.Item>
+			<Popover.Item>
+				<Link href={`/customize?q=${q}`}>Customize search</Link>
+			</Popover.Item>
+		</>
+	);
+
+	return popoverContent;
+}
 
 export default Search;

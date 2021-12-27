@@ -48,7 +48,7 @@ export function Tile({
  */
 function getIframeUrl(tile: Tile, query: string): string {
 	const se = getSearchEngine(tile);
-	const url = se.searchString?.replaceAll('%s', query);
+	const url = se.searchString?.replace(/%s/g, query);
 
 	if (!url) {
 		throw new Error('url is empty in getIframeUrl');
