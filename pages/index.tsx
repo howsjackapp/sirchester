@@ -72,7 +72,10 @@ const Home: NextPage = () => {
 				</svg>
 			</a>
 			<Head>
-				<title>Sir Chester - Here to help with your searches</title>
+				<title>
+					Sir Chester - Append &quot;reddit&quot; or &quot;hacker
+					news&quot; to your search queries
+				</title>
 			</Head>
 			<Page className="container">
 				<Page.Content>

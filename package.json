@@ -1,6 +1,7 @@
 {
 	"name": "@sirchester/webapp",
 	"version": "0.1.0",
+	"description": "Append 'reddit' or 'hacker news' to your search queries",
 	"license": "AGPL-3.0",
 	"private": true,
 	"scripts": {
