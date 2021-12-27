@@ -1,29 +1,23 @@
-import type { NextPage } from 'next';
 import Head from 'next/head';
 import React from 'react';
 
 import { Customizer, Footer } from '../components';
-import { useTileState } from '../util/context';
+import { PropsWithTileState, tilesGetServerSideProps } from '../util';
 
-const Customize: NextPage = () => {
-	const [tileState, setTileState] = useTileState();
+export const getServerSideProps = tilesGetServerSideProps;
 
-	if (!tileState) {
-		return <p>loading...</p>;
-	}
+type SearchProps = PropsWithTileState;
 
+function Customize({ tileState }: SearchProps): React.ReactElement | null {
 	return (
 		<>
 			<Head>
 				<title>Customize - Sir Chester</title>
 			</Head>
-			<Customizer
-				initialTileState={tileState}
-				onSetTileState={setTileState}
-			/>
+			<Customizer initialTileState={tileState} />
 			<Footer />
 		</>
 	);
-};
+}
 
 export default Customize;

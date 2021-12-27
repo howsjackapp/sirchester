@@ -11,6 +11,7 @@ import {
 	useToasts,
 } from '@geist-ui/react';
 import { Info, RotateCcw, Save, X } from '@geist-ui/react-icons';
+import { setCookies } from 'cookies-next';
 import debug from 'debug';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -25,6 +26,7 @@ import {
 } from 'react-mosaic-component';
 
 import {
+	COOKIE_TILE_STATE,
 	gallery,
 	getSearchEngine,
 	getTileName,
@@ -38,13 +40,9 @@ const l = debug('sirchester:customize');
 
 interface CustomizerProps {
 	initialTileState: TileState;
-	onSetTileState: (ts: TileState) => void;
 }
 
-export const Customizer: FC<CustomizerProps> = ({
-	initialTileState,
-	onSetTileState,
-}) => {
+export const Customizer: FC<CustomizerProps> = ({ initialTileState }) => {
 	const router = useRouter();
 	const [wip, setWip] = useState(initialTileState); // WIP tileState.
 	const [_, setToast] = useToasts();
@@ -74,7 +72,8 @@ export const Customizer: FC<CustomizerProps> = ({
 	}
 
 	function handleSave(): void {
-		onSetTileState(wip);
+		// Set cookie to expire in a far away future,.
+		setCookies(COOKIE_TILE_STATE, wip, { expires: new Date('2050-01-01') });
 		setToast({
 			delay: 3000,
 			text: 'Successfully saved new configuration.',
