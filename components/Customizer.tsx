@@ -113,7 +113,7 @@ export const Customizer: FC<CustomizerProps> = ({ initialTileState }) => {
 				</div>
 				<div className="flex align-center">
 					<Tooltip
-						text="Help tutorials coming soon! Sorry."
+						text="Help tutorials coming soon!"
 						placement="bottom"
 						type="dark"
 					>
