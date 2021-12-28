@@ -1,5 +1,5 @@
 import { Modal } from '@geist-ui/react';
-import { Home } from '@geist-ui/react-icons';
+import { ArrowLeft } from '@geist-ui/react-icons';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
@@ -10,13 +10,17 @@ export function SizeGuard(): React.ReactElement {
 	const [windowWidth, setWindowWidth] = useState(0);
 
 	useEffect(() => {
+		setWindowWidth(window.innerWidth);
+
 		window.addEventListener('resize', () => {
 			setWindowWidth(window.innerWidth);
 		});
 	}, []);
 
+	const isTooSmall = !!windowWidth && windowWidth < MIN_WIN_WIDTH;
+
 	return (
-		<Modal disableBackdropClick visible={windowWidth < MIN_WIN_WIDTH}>
+		<Modal disableBackdropClick visible={isTooSmall}>
 			<Modal.Title>Screen too small!</Modal.Title>
 			<Modal.Subtitle>
 				Sir Chester is not available on small screens
@@ -29,7 +33,7 @@ export function SizeGuard(): React.ReactElement {
 				</p>
 				<p>We recommend you to try again on a Desktop screen.</p>
 			</Modal.Content>
-			<Modal.Action icon={<Home />}>
+			<Modal.Action icon={<ArrowLeft />}>
 				<Link href="/">Back to Homepage</Link>
 			</Modal.Action>
 		</Modal>

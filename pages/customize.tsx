@@ -1,7 +1,13 @@
 import Head from 'next/head';
 import React from 'react';
 
-import { Chat, Customizer, Footer, SizeGuard } from '../components';
+import {
+	Chat,
+	CookieBanner,
+	Customizer,
+	Footer,
+	SizeGuard,
+} from '../components';
 import { PropsWithTileState, tilesGetServerSideProps } from '../util';
 
 export const getServerSideProps = tilesGetServerSideProps;
@@ -16,6 +22,7 @@ function Customize({ tileState }: SearchProps): React.ReactElement | null {
 			</Head>
 
 			<Chat />
+			<CookieBanner force />
 			<SizeGuard />
 
 			<Customizer initialTileState={tileState} />

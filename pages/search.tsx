@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Mosaic } from 'react-mosaic-component';
 import { isArray } from 'util';
 
-import { Fab, SizeGuard, Tile } from '../components';
+import { CookieBanner, Fab, SizeGuard, Tile } from '../components';
 import { PropsWithTileState, tilesGetServerSideProps } from '../util';
 
 export const getServerSideProps = tilesGetServerSideProps;
@@ -26,6 +26,7 @@ function Search({ tileState }: SearchProps): React.ReactElement | null {
 				<title>{q} - Sir Chester</title>
 			</Head>
 
+			<CookieBanner force />
 			<SizeGuard />
 			<Fab q={q} open={open} onOpen={setOpen} />
 

@@ -46,7 +46,7 @@ interface CustomizerProps {
 export const Customizer: FC<CustomizerProps> = ({ initialTileState }) => {
 	const router = useRouter();
 	const [wip, setWip] = useState(initialTileState); // WIP tileState.
-	const [_, setToast] = useToasts();
+	const [, setToast] = useToasts();
 	const { q } = router.query;
 
 	function backToSearch(): void {

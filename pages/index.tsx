@@ -15,7 +15,7 @@ import NextImage from 'next/image';
 import { useRouter } from 'next/router';
 import React, { FormEventHandler, useState } from 'react';
 
-import { Chat, Footer, GithubBanner } from '../components';
+import { Chat, CookieBanner, Footer, GithubBanner } from '../components';
 import styles from './index.module.css';
 
 const Home: NextPage = () => {
@@ -42,8 +42,10 @@ const Home: NextPage = () => {
 					news&quot; to your search queries
 				</title>
 			</Head>
+
 			<GithubBanner />
 			<Chat />
+			<CookieBanner />
 
 			<Page className="container">
 				<Page.Content>

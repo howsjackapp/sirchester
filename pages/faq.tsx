@@ -10,6 +10,7 @@ function Faq(): React.ReactElement {
 			<Head>
 				<title>F.A.Q. - Sir Chester</title>
 			</Head>
+
 			<GithubBanner />
 			<Chat />
 
@@ -22,7 +23,7 @@ function Faq(): React.ReactElement {
 						news&quot; to your search queries.
 					</p>
 
-					<h2>TODO</h2>
+					<h2>Why does Sir Chester use cookies?</h2>
 					<p>TODO</p>
 				</Page.Content>
 			</Page>
