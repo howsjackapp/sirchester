@@ -16,16 +16,16 @@ export function getURL(): string {
 /**
  * Navigate to a new path, but also pass current query params.
  *
- * @param path - The current path.
+ * @param currentPath - The current path.
  * @param to - The URL to navigate to.
  */
 export function passQueryParams(
-	path: string,
+	currentPath: string,
 	to: string,
 	addQueryParams?: [string, string][],
 	removeQueryParams?: string[]
 ): string {
-	const u = new URL(path, getURL());
+	const u = new URL(currentPath, getURL());
 	addQueryParams?.forEach(([k, v]) => {
 		u.searchParams.set(k, v);
 	});

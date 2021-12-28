@@ -64,7 +64,8 @@ export function Toolbar({
 
 		router
 			.push(
-				passQueryParams(router.asPath, q ? '/search' : '/', [
+				passQueryParams(router.asPath, '/search', [
+					['q', (q as string | undefined) || 'test'],
 					[TILE_STATE_QUERY_PARAM, getWipBase64(wip)],
 				])
 			)

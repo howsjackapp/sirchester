@@ -1,13 +1,17 @@
 import { Page } from '@geist-ui/react';
 import Head from 'next/head';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 import { Chat, Footer, GithubBanner, Nav } from '../components';
-import { tilesGetServerSideProps } from '../util';
+import { passQueryParams, tilesGetServerSideProps } from '../util';
 
 export const getServerSideProps = tilesGetServerSideProps;
 
 function Faq(): React.ReactElement {
+	const router = useRouter();
+
 	return (
 		<>
 			<Head>
@@ -27,7 +31,17 @@ function Faq(): React.ReactElement {
 					</p>
 
 					<h2>Why does Sir Chester use cookies?</h2>
-					<p>TODO</p>
+					<p>
+						Sir Chester saves your search engine preferences in a
+						cookie. When you{' '}
+						<Link
+							href={passQueryParams(router.asPath, '/customize')}
+						>
+							customize
+						</Link>{' '}
+						the search engine layout and click on &quot;Save as
+						default&quot;, we save that configuration in a cookie.
+					</p>
 				</Page.Content>
 			</Page>
 			<Footer />
