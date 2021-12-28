@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Mosaic } from 'react-mosaic-component';
 import { isArray } from 'util';
 
-import { Fab, Tile } from '../components';
+import { Fab, SizeGuard, Tile } from '../components';
 import { PropsWithTileState, tilesGetServerSideProps } from '../util';
 
 export const getServerSideProps = tilesGetServerSideProps;
@@ -25,6 +25,10 @@ function Search({ tileState }: SearchProps): React.ReactElement | null {
 			<Head>
 				<title>{q} - Sir Chester</title>
 			</Head>
+
+			<SizeGuard />
+			<Fab q={q} open={open} onOpen={setOpen} />
+
 			<Mosaic<number>
 				renderTile={(id, path) => (
 					<Tile
@@ -40,7 +44,6 @@ function Search({ tileState }: SearchProps): React.ReactElement | null {
 				initialValue={tileState.currentNode}
 				resize="DISABLED"
 			/>
-			<Fab q={q} open={open} onOpen={setOpen} />
 		</>
 	);
 }

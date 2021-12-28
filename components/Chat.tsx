@@ -1,4 +1,4 @@
-import ChatWidget from '@papercups-io/chat-widget';
+import { ChatWidget } from '@papercups-io/chat-widget';
 import React from 'react';
 
 export function Chat(): React.ReactElement {
