@@ -1,3 +1,4 @@
+export * from './Chat';
 export * from './Customizer';
 export * from './Fab';
 export * from './Footer';

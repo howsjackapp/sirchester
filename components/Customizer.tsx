@@ -1,5 +1,6 @@
 import {
 	Button,
+	ButtonDropdown,
 	Card,
 	Description,
 	Image,
@@ -9,7 +10,7 @@ import {
 	Tooltip,
 	useToasts,
 } from '@geist-ui/react';
-import { Info, RotateCcw, Save, X } from '@geist-ui/react-icons';
+import { Info, RotateCcw, X } from '@geist-ui/react-icons';
 import { setCookies } from 'cookies-next';
 import debug from 'debug';
 import { useRouter } from 'next/router';
@@ -28,6 +29,7 @@ import {
 	gallery,
 	getSearchEngine,
 	getTileName,
+	getURL,
 	isPreshippedTile,
 	preShippedSearchEngines,
 	TileMap,
@@ -82,6 +84,23 @@ export const Customizer: FC<CustomizerProps> = ({ initialTileState }) => {
 		return backToSearch();
 	}
 
+	function handleShare(): void {
+		const tileState = Buffer.from(JSON.stringify(wip));
+		const currentURL = new URL(router.asPath, getURL());
+		currentURL.searchParams.append(
+			'tile_state',
+			tileState.toString('base64')
+		);
+		router.push(`/customize${currentURL.search}`).catch(alert);
+		navigator.clipboard.writeText(currentURL.toString()).catch(alert);
+
+		setToast({
+			delay: 3000,
+			text: 'Share URL copied to clipboard.',
+			type: 'success',
+		});
+	}
+
 	function handleCreateNode(): number {
 		const id = getNextId(wip.tiles);
 		l('Creating new tile with id=%d', id);
@@ -124,7 +143,6 @@ export const Customizer: FC<CustomizerProps> = ({ initialTileState }) => {
 							icon={<X />}
 							onClick={backToSearch}
 							scale={0.25}
-							my="0.25rem"
 							type="abort"
 						>
 							Cancel
@@ -135,14 +153,12 @@ export const Customizer: FC<CustomizerProps> = ({ initialTileState }) => {
 							icon={<RotateCcw />}
 							onClick={() => setWip(initialTileState)}
 							scale={0.25}
-							my="0.25rem"
 						>
 							Undo all
 						</Button>
 						<Spacer w={0.25} />
 						<Select
 							placeholder="Choose from gallery"
-							my="0.25rem"
 							onChange={(v) => setWip(gallery[v as string])}
 							scale={0.4}
 						>
@@ -153,16 +169,14 @@ export const Customizer: FC<CustomizerProps> = ({ initialTileState }) => {
 							))}
 						</Select>
 						<Spacer w={0.25} />
-						<Button
-							auto
-							icon={<Save />}
-							onClick={handleSave}
-							scale={0.25}
-							my="0.25rem"
-							type="success"
-						>
-							Save
-						</Button>
+						<ButtonDropdown auto scale={0.25} type="success">
+							<ButtonDropdown.Item main onClick={handleSave}>
+								Save
+							</ButtonDropdown.Item>
+							<ButtonDropdown.Item onClick={handleShare}>
+								Share
+							</ButtonDropdown.Item>
+						</ButtonDropdown>
 						<Spacer w={1} />
 					</>
 				}

@@ -2,15 +2,17 @@ import { Page } from '@geist-ui/react';
 import Head from 'next/head';
 import React from 'react';
 
-import { Footer, GithubBanner, Nav } from '../components';
+import { Chat, Footer, GithubBanner, Nav } from '../components';
 
 function Faq(): React.ReactElement {
 	return (
 		<>
-			<GithubBanner />
 			<Head>
 				<title>F.A.Q. - Sir Chester</title>
 			</Head>
+			<GithubBanner />
+			<Chat />
+
 			<Nav />
 			<Page className="container">
 				<Page.Content>

@@ -15,7 +15,7 @@ import NextImage from 'next/image';
 import { useRouter } from 'next/router';
 import React, { FormEventHandler, useState } from 'react';
 
-import { Footer, GithubBanner } from '../components';
+import { Chat, Footer, GithubBanner } from '../components';
 import styles from './index.module.css';
 
 const Home: NextPage = () => {
@@ -36,13 +36,15 @@ const Home: NextPage = () => {
 
 	return (
 		<>
-			<GithubBanner />
 			<Head>
 				<title>
 					Sir Chester - Append &quot;reddit&quot; or &quot;hacker
 					news&quot; to your search queries
 				</title>
 			</Head>
+			<GithubBanner />
+			<Chat />
+
 			<Page className="container">
 				<Page.Content>
 					<h1>
