@@ -3,7 +3,6 @@ import {
 	Card,
 	Description,
 	Image,
-	Link as GLink,
 	Select,
 	Spacer,
 	Text,
@@ -13,7 +12,6 @@ import {
 import { Info, RotateCcw, Save, X } from '@geist-ui/react-icons';
 import { setCookies } from 'cookies-next';
 import debug from 'debug';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { FC, useState } from 'react';
 import {
@@ -35,6 +33,7 @@ import {
 	TileMap,
 	TileState,
 } from '../util';
+import { Nav } from './Nav';
 
 const l = debug('sirchester:customize');
 
@@ -100,80 +99,74 @@ export const Customizer: FC<CustomizerProps> = ({ initialTileState }) => {
 
 	return (
 		<>
-			<div className="flex space-between">
-				<div className="flex align-center flex-grow-no-basis">
-					<Spacer w={1} />
-					<Link href="/">
-						<GLink>
-							<Text b small>
-								Sir Chester
-							</Text>
-						</GLink>
-					</Link>
-				</div>
-				<div className="flex align-center">
-					<Tooltip
-						text="Help tutorials coming soon!"
-						placement="bottom"
-						type="dark"
-					>
-						<Info size={16} />
-					</Tooltip>
+			<Nav
+				center={
+					<>
+						<Tooltip
+							text="Help tutorials coming soon!"
+							placement="bottom"
+							type="dark"
+						>
+							<Info size={16} />
+						</Tooltip>
 
-					<Spacer w={0.5} />
-					<Text small>
-						Use this page to customize your search engines like a
-						tiling window manager.
-					</Text>
-				</div>
-				<div className="flex flex-grow-no-basis justify-end">
-					<Button
-						auto
-						icon={<X />}
-						onClick={backToSearch}
-						scale={0.25}
-						my="0.25rem"
-						type="abort"
-					>
-						Cancel
-					</Button>
-					<Spacer w={0.25} />
-					<Button
-						auto
-						icon={<RotateCcw />}
-						onClick={() => setWip(initialTileState)}
-						scale={0.25}
-						my="0.25rem"
-					>
-						Undo all
-					</Button>
-					<Spacer w={0.25} />
-					<Select
-						placeholder="Choose from gallery"
-						my="0.25rem"
-						onChange={(v) => setWip(gallery[v as string])}
-						scale={0.4}
-					>
-						{Object.keys(gallery).map((o) => (
-							<Select.Option key={o} value={o}>
-								{gallery[o].name}
-							</Select.Option>
-						))}
-					</Select>
-					<Spacer w={0.25} />
-					<Button
-						auto
-						icon={<Save />}
-						onClick={handleSave}
-						scale={0.25}
-						my="0.25rem"
-						type="success"
-					>
-						Save
-					</Button>
-					<Spacer w={1} />
-				</div>
-			</div>
+						<Spacer w={0.5} />
+						<Text small>
+							Use this page to customize your search engines like
+							a tiling window manager.
+						</Text>
+					</>
+				}
+				right={
+					<>
+						<Button
+							auto
+							icon={<X />}
+							onClick={backToSearch}
+							scale={0.25}
+							my="0.25rem"
+							type="abort"
+						>
+							Cancel
+						</Button>
+						<Spacer w={0.25} />
+						<Button
+							auto
+							icon={<RotateCcw />}
+							onClick={() => setWip(initialTileState)}
+							scale={0.25}
+							my="0.25rem"
+						>
+							Undo all
+						</Button>
+						<Spacer w={0.25} />
+						<Select
+							placeholder="Choose from gallery"
+							my="0.25rem"
+							onChange={(v) => setWip(gallery[v as string])}
+							scale={0.4}
+						>
+							{Object.keys(gallery).map((o) => (
+								<Select.Option key={o} value={o}>
+									{gallery[o].name}
+								</Select.Option>
+							))}
+						</Select>
+						<Spacer w={0.25} />
+						<Button
+							auto
+							icon={<Save />}
+							onClick={handleSave}
+							scale={0.25}
+							my="0.25rem"
+							type="success"
+						>
+							Save
+						</Button>
+						<Spacer w={1} />
+					</>
+				}
+			/>
 			<Mosaic<number>
 				onChange={(newNode) => {
 					if (newNode) {

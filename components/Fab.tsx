@@ -30,7 +30,6 @@ export function Fab({ onOpen, open, q }: FabProps): React.ReactElement {
 function popoverContentWithQ(q: string): () => React.ReactElement {
 	const popoverContent = () => (
 		<>
-			<Popover.Item title>Sir Chester</Popover.Item>
 			<Popover.Item>
 				<Link href="/">Homepage</Link>
 			</Popover.Item>
