@@ -36,7 +36,7 @@ export function CookieBanner({
 			setToast({
 				text: (
 					<span>
-						Sir Chester only uses one cookie, and not to
+						Sir Chester only uses one cookie, and it&apos;s not to
 						<br />
 						track you.{' '}
 						<Link href={passQueryParams(router.asPath, '/faq')}>
