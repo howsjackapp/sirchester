@@ -2,7 +2,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { Mosaic } from 'react-mosaic-component';
-import { isArray } from 'util';
 
 import { CookieBanner, Fab, SizeGuard, Tile } from '../components';
 import { PropsWithTileState, tilesGetServerSideProps } from '../util';
@@ -16,7 +15,7 @@ function Search({ tileState }: SearchProps): React.ReactElement | null {
 	const router = useRouter();
 	const { q } = router.query;
 
-	if (!q || isArray(q)) {
+	if (!q || Array.isArray(q)) {
 		return null;
 	}
 

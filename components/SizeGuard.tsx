@@ -1,12 +1,16 @@
 import { Modal } from '@geist-ui/react';
 import { ArrowLeft } from '@geist-ui/react-icons';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+
+import { passQueryParams } from '../util';
 
 // Width below which we show a modal.
 const MIN_WIN_WIDTH = 1024;
 
 export function SizeGuard(): React.ReactElement {
+	const router = useRouter();
 	const [windowWidth, setWindowWidth] = useState(0);
 
 	useEffect(() => {
@@ -34,7 +38,11 @@ export function SizeGuard(): React.ReactElement {
 				<p>We recommend you to try again on a Desktop screen.</p>
 			</Modal.Content>
 			<Modal.Action icon={<ArrowLeft />}>
-				<Link href="/">Back to Homepage</Link>
+				<Link
+					href={passQueryParams(router.asPath, '/', undefined, ['q'])}
+				>
+					Back to Homepage
+				</Link>
 			</Modal.Action>
 		</Modal>
 	);

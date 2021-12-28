@@ -3,6 +3,9 @@ import Head from 'next/head';
 import React from 'react';
 
 import { Chat, Footer, GithubBanner, Nav } from '../components';
+import { tilesGetServerSideProps } from '../util';
+
+export const getServerSideProps = tilesGetServerSideProps;
 
 function Faq(): React.ReactElement {
 	return (

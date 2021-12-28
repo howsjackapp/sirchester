@@ -13,6 +13,7 @@ import {
 import { Info, RotateCcw, X } from '@geist-ui/react-icons';
 import { setCookies } from 'cookies-next';
 import debug from 'debug';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { FC, useState } from 'react';
 import {
@@ -31,7 +32,9 @@ import {
 	getTileName,
 	getURL,
 	isPreshippedTile,
+	passQueryParams,
 	preShippedSearchEngines,
+	TILE_STATE_QUERY_PARAM,
 	TileMap,
 	TileState,
 } from '../util';
@@ -49,8 +52,15 @@ export const Customizer: FC<CustomizerProps> = ({ initialTileState }) => {
 	const [, setToast] = useToasts();
 	const { q } = router.query;
 
-	function backToSearch(): void {
-		router.push(q ? `/search?q=${q as string}` : '/').catch(alert);
+	// Save current state to cookies.
+	function saveCookies(): void {
+		// Set cookie to expire in a far away future,.
+		setCookies(COOKIE_TILE_STATE, wip, { expires: new Date('2050-01-01') });
+	}
+
+	// Get the base64 encoding of the current wip tile state.
+	function getWipBase64(): string {
+		return Buffer.from(JSON.stringify(wip)).toString('base64');
 	}
 
 	function handleChangeTile(leafId: number) {
@@ -72,27 +82,63 @@ export const Customizer: FC<CustomizerProps> = ({ initialTileState }) => {
 		};
 	}
 
+	function handlePreview(): void {
+		setToast({
+			actions: [
+				{
+					handler: (_e, cancel) => {
+						router
+							.push(passQueryParams(router.asPath, '/customize'))
+							.catch(alert);
+						cancel();
+					},
+					name: 'Edit more',
+				},
+				{
+					handler: (_e, cancel) => {
+						cancel();
+					},
+					name: 'Close',
+					passive: true,
+				},
+			],
+			delay: 999999999,
+			text: 'Previewing new configuration.',
+		});
+
+		router
+			.push(
+				passQueryParams(router.asPath, q ? '/search' : '/', [
+					[TILE_STATE_QUERY_PARAM, getWipBase64()],
+				])
+			)
+			.catch(alert);
+	}
+
 	function handleSave(): void {
-		// Set cookie to expire in a far away future,.
-		setCookies(COOKIE_TILE_STATE, wip, { expires: new Date('2050-01-01') });
+		saveCookies();
 		setToast({
 			delay: 3000,
 			text: 'Successfully saved new configuration.',
 			type: 'success',
 		});
 
-		return backToSearch();
+		router
+			.push(
+				passQueryParams(router.asPath, q ? '/search' : '/', undefined, [
+					TILE_STATE_QUERY_PARAM,
+				])
+			)
+			.catch(alert);
 	}
 
 	function handleShare(): void {
-		const tileState = Buffer.from(JSON.stringify(wip));
-		const currentURL = new URL(router.asPath, getURL());
-		currentURL.searchParams.append(
-			'tile_state',
-			tileState.toString('base64')
-		);
-		router.push(`/customize${currentURL.search}`).catch(alert);
-		navigator.clipboard.writeText(currentURL.toString()).catch(alert);
+		const b64 = getWipBase64();
+
+		const newURL = new URL(router.asPath, getURL());
+		newURL.searchParams.set(TILE_STATE_QUERY_PARAM, b64);
+
+		navigator.clipboard.writeText(newURL.toString()).catch(alert);
 
 		setToast({
 			delay: 3000,
@@ -138,15 +184,11 @@ export const Customizer: FC<CustomizerProps> = ({ initialTileState }) => {
 				}
 				right={
 					<>
-						<Button
-							auto
-							icon={<X />}
-							onClick={backToSearch}
-							scale={0.25}
-							type="abort"
-						>
-							Cancel
-						</Button>
+						<Link href={passQueryParams(router.asPath, '/search')}>
+							<Button auto icon={<X />} scale={0.25} type="abort">
+								Cancel
+							</Button>
+						</Link>
 						<Spacer w={0.25} />
 						<Button
 							auto
@@ -169,11 +211,20 @@ export const Customizer: FC<CustomizerProps> = ({ initialTileState }) => {
 							))}
 						</Select>
 						<Spacer w={0.25} />
-						<ButtonDropdown auto scale={0.25} type="success">
-							<ButtonDropdown.Item main onClick={handleSave}>
-								Save
+						<ButtonDropdown scale={0.25} type="success">
+							<ButtonDropdown.Item main onClick={handlePreview}>
+								Preview
 							</ButtonDropdown.Item>
-							<ButtonDropdown.Item onClick={handleShare}>
+							<ButtonDropdown.Item
+								onClick={handleSave}
+								type="success"
+							>
+								Save as default
+							</ButtonDropdown.Item>
+							<ButtonDropdown.Item
+								onClick={handleShare}
+								type="success"
+							>
 								Share
 							</ButtonDropdown.Item>
 						</ButtonDropdown>

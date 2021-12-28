@@ -2,7 +2,10 @@ import { useToasts } from '@geist-ui/react';
 import { Modal } from '@geist-ui/react';
 import { ArrowLeft } from '@geist-ui/react-icons';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+
+import { passQueryParams } from '../util';
 
 const LS_ACCEPT_COOKIE_KEY = 'sirchester_accept_cookie';
 const LS_ACCEPT_COOKIE_VALUE = 'true'; // LocalStorage value when cookie accepted.
@@ -16,6 +19,7 @@ interface CookieBannerProps {
 export function CookieBanner({
 	force,
 }: CookieBannerProps): React.ReactElement | null {
+	const router = useRouter();
 	const [, setToast] = useToasts();
 	const [showModal, setShowModal] = useState<boolean>(false);
 
@@ -34,7 +38,11 @@ export function CookieBanner({
 					<span>
 						Sir Chester only uses one cookie, and not to
 						<br />
-						track you. <Link href="/faq">Read more</Link>.
+						track you.{' '}
+						<Link href={passQueryParams(router.asPath, '/faq')}>
+							Read more
+						</Link>
+						.
 					</span>
 				),
 				actions: [
@@ -62,11 +70,18 @@ export function CookieBanner({
 					Sir Chester only uses one cookie, to store your search
 					engine preferences. It <strong>DOES NOT</strong> track any
 					other usage or personal info.{' '}
-					<Link href="/faq">Read more</Link>.
+					<Link href={passQueryParams(router.asPath, '/faq')}>
+						Read more
+					</Link>
+					.
 				</p>
 			</Modal.Content>
 			<Modal.Action icon={<ArrowLeft />} passive>
-				<Link href="/">Back to Homepage</Link>
+				<Link
+					href={passQueryParams(router.asPath, '/', undefined, ['q'])}
+				>
+					Back to Homepage
+				</Link>
 			</Modal.Action>
 		</Modal>
 	) : null;

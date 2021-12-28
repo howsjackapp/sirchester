@@ -1,8 +1,10 @@
 import { Link as GLink, Spacer, Text } from '@geist-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 
+import { passQueryParams } from '../util';
 import styles from './Nav.module.css';
 
 interface NavProps {
@@ -11,11 +13,15 @@ interface NavProps {
 }
 
 export function Nav({ center, right }: NavProps): React.ReactElement {
+	const router = useRouter();
+
 	return (
 		<div className="flex space-between">
 			<div className="flex align-center flex-grow-no-basis">
 				<Spacer w={1} />
-				<Link href="/">
+				<Link
+					href={passQueryParams(router.asPath, '/', undefined, ['q'])}
+				>
 					<GLink>
 						<Image
 							className={styles.logo}

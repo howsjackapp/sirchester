@@ -16,7 +16,10 @@ import { useRouter } from 'next/router';
 import React, { FormEventHandler, useState } from 'react';
 
 import { Chat, CookieBanner, Footer, GithubBanner } from '../components';
+import { passQueryParams, tilesGetServerSideProps } from '../util';
 import styles from './index.module.css';
+
+export const getServerSideProps = tilesGetServerSideProps;
 
 const Home: NextPage = () => {
 	const router = useRouter();
@@ -31,7 +34,9 @@ const Home: NextPage = () => {
 			return;
 		}
 
-		router.push(`/search?q=${q}`).catch(alert);
+		router
+			.push(passQueryParams(router.asPath, '/search', [['q', q]]))
+			.catch(alert);
 	};
 
 	return (
