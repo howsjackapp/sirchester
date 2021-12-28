@@ -3,9 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { MosaicBranch, MosaicWindow } from 'react-mosaic-component';
 
 import { getSearchEngine, getTileName, Tile, TileState } from '../util';
+import { Iframe } from './Iframe';
 
 export interface TileProps {
 	id: number;
+	onIframeClick: () => void;
 	/**
 	 * The `?q=` query parameter, representing the user search string.
 	 */
@@ -16,6 +18,7 @@ export interface TileProps {
 
 export function Tile({
 	id,
+	onIframeClick,
 	path,
 	q,
 	tileState,
@@ -34,8 +37,9 @@ export function Tile({
 			title={getTileName(tileState.tiles[id])}
 		>
 			{loading && <Loading />}
-			<iframe
+			<Iframe
 				className={`full-width full-height ${loading ? 'hide' : ''}`}
+				onInferredClick={onIframeClick}
 				onLoad={() => setLoading(false)}
 				src={getIframeUrl(tileState.tiles[id], q)}
 			/>

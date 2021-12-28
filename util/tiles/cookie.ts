@@ -1,10 +1,13 @@
 import { getCookie } from 'cookies-next';
 import { GetServerSideProps } from 'next';
+import type { ParsedUrlQuery } from 'querystring';
 
 import { gallery } from './gallery';
 import { TileState } from './tiles';
 
 export const COOKIE_TILE_STATE = 'sirchester_tile_state';
+
+export const TILE_STATE_QUERY_PARAM = 'tile_state';
 
 export interface PropsWithTileState {
 	tileState: TileState;
@@ -18,7 +21,8 @@ export interface PropsWithTileState {
  */
 // eslint-disable-next-line @typescript-eslint/require-await
 export const tilesGetServerSideProps: GetServerSideProps = async (context) => {
-	const tileStateStr = getCookie(COOKIE_TILE_STATE, context) as string;
+	const tileStateStr = (parseQueryParam(context.query) ||
+		getCookie(COOKIE_TILE_STATE, context)) as string;
 
 	const tileState = tileStateStr
 		? (JSON.parse(tileStateStr) as TileState)
@@ -28,3 +32,19 @@ export const tilesGetServerSideProps: GetServerSideProps = async (context) => {
 		props: { tileState },
 	};
 };
+
+/**
+ * Parse the query params for tile state.
+ *
+ * @param queryParam - The Next query params.
+ */
+function parseQueryParam(queryParam: ParsedUrlQuery): string | undefined {
+	const q = queryParam[TILE_STATE_QUERY_PARAM];
+	if (!q || Array.isArray(q)) {
+		return undefined;
+	}
+
+	const buf = Buffer.from(q, 'base64');
+	console.log(buf.toString('utf8'));
+	return buf.toString('utf8');
+}

@@ -70,3 +70,10 @@ iframe {
 .text-center {
 	text-align: center;
 }
+
+/**
+ * Overwrite Geist UI
+ */
+.toast {
+	margin-right: 4rem;
+}
