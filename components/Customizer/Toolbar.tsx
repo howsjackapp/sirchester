@@ -7,11 +7,11 @@ import {
 	Tooltip,
 	useToasts,
 } from '@geist-ui/react';
-import { Info, RotateCcw, X } from '@geist-ui/react-icons';
+import { Eye, Info, RotateCcw, Save, Share2, X } from '@geist-ui/react-icons';
 import { setCookies } from 'cookies-next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
 	COOKIE_TILE_STATE,
@@ -36,31 +36,11 @@ export function Toolbar({
 }: ToolbarProps): React.ReactElement {
 	const router = useRouter();
 	const [, setToast] = useToasts();
+	const [loading, setLoading] = useState(false);
 	const { q } = router.query;
 
 	function handlePreview(): void {
-		setToast({
-			actions: [
-				{
-					handler: (_e, cancel) => {
-						router
-							.push(passQueryParams(router.asPath, '/customize'))
-							.catch(alert);
-						cancel();
-					},
-					name: 'Edit more',
-				},
-				{
-					handler: (_e, cancel) => {
-						cancel();
-					},
-					name: 'Close',
-					passive: true,
-				},
-			],
-			delay: 10000,
-			text: 'Previewing new configuration.',
-		});
+		setLoading(true);
 
 		router
 			.push(
@@ -69,22 +49,60 @@ export function Toolbar({
 					[TILE_STATE_QUERY_PARAM, getWipBase64(wip)],
 				])
 			)
+			.then(() =>
+				setToast({
+					actions: [
+						{
+							handler: (_e, cancel) => {
+								router
+									.push(
+										passQueryParams(
+											router.asPath,
+											'/customize',
+											[
+												[
+													TILE_STATE_QUERY_PARAM,
+													getWipBase64(wip),
+												],
+											]
+										)
+									)
+									.catch(alert);
+								cancel();
+							},
+							name: 'Edit more',
+						},
+						{
+							handler: (_e, cancel) => {
+								cancel();
+							},
+							name: 'Close',
+							passive: true,
+						},
+					],
+					delay: 10000,
+					text: 'Previewing new configuration.',
+				})
+			)
 			.catch(alert);
 	}
 
 	function handleSave(): void {
+		setLoading(true);
 		saveCookies(wip);
-		setToast({
-			delay: 3000,
-			text: 'Successfully saved new configuration.',
-			type: 'success',
-		});
 
 		router
 			.push(
 				passQueryParams(router.asPath, q ? '/search' : '/', undefined, [
 					TILE_STATE_QUERY_PARAM,
 				])
+			)
+			.then(() =>
+				setToast({
+					delay: 3000,
+					text: 'Successfully saved new configuration.',
+					type: 'success',
+				})
 			)
 			.catch(alert);
 	}
@@ -95,13 +113,16 @@ export function Toolbar({
 		const newURL = new URL(router.asPath, getURL());
 		newURL.searchParams.set(TILE_STATE_QUERY_PARAM, b64);
 
-		navigator.clipboard.writeText(newURL.toString()).catch(alert);
-
-		setToast({
-			delay: 3000,
-			text: 'Share URL copied to clipboard.',
-			type: 'success',
-		});
+		navigator.clipboard
+			.writeText(newURL.toString())
+			.then(() =>
+				setToast({
+					delay: 3000,
+					text: 'Share URL copied to clipboard.',
+					type: 'success',
+				})
+			)
+			.catch(alert);
 	}
 
 	return (
@@ -152,21 +173,26 @@ export function Toolbar({
 						))}
 					</Select>
 					<Spacer w={0.25} />
-					<ButtonDropdown scale={0.25} type="success">
+					<ButtonDropdown
+						loading={loading}
+						scale={0.25}
+						type="success"
+					>
 						<ButtonDropdown.Item main onClick={handlePreview}>
-							Preview
+							<Eye size={14} /> <Spacer w={0.5} /> Preview
 						</ButtonDropdown.Item>
 						<ButtonDropdown.Item
 							onClick={handleSave}
 							type="success"
 						>
-							Save as default
+							<Save size={14} /> <Spacer w={0.5} /> Save as
+							default
 						</ButtonDropdown.Item>
 						<ButtonDropdown.Item
 							onClick={handleShare}
 							type="success"
 						>
-							Share
+							<Share2 size={14} /> <Spacer w={0.5} /> Share
 						</ButtonDropdown.Item>
 					</ButtonDropdown>
 					<Spacer w={1} />
