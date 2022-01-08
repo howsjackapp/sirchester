@@ -13,6 +13,10 @@ export interface TileProps {
 	 */
 	q: string;
 	path: MosaicBranch[];
+	/**
+	 * Scroll the iframe by Y pixels down on load.
+	 */
+	scrollY?: number;
 	tileState: TileState;
 }
 
@@ -21,6 +25,7 @@ export function Tile({
 	onIframeClick,
 	path,
 	q,
+	scrollY,
 	tileState,
 }: TileProps): React.ReactElement {
 	const [loading, setLoading] = useState(true);
@@ -40,7 +45,6 @@ export function Tile({
 			<Iframe
 				className={`full-width full-height ${loading ? 'hide' : ''}`}
 				onInferredClick={onIframeClick}
-				onLoad={() => setLoading(false)}
 				src={getIframeUrl(tileState.tiles[id], q)}
 			/>
 		</MosaicWindow>
@@ -62,7 +66,7 @@ function getIframeUrl(tile: Tile, query: string): string {
 		throw new Error('url is empty in getIframeUrl');
 	}
 
-	if (se.proxy) {
+	if (tile.proxy) {
 		return `${
 			process.env.NEXT_PUBLIC_PROXY_URL
 		}/?__sirchester_target=${encodeURIComponent(url)}`;

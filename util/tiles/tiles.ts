@@ -1,25 +1,26 @@
 import { MosaicNode } from 'react-mosaic-component';
 
-import { preShippedSearchEngines } from './searchengines';
-
-export interface SearchEngine {
-	description: string;
-	image?: string;
-	name: string;
-	searchString: string;
-	proxy?: SearchEngineProxy;
-}
+import { preShippedSearchEngines, SearchEngine } from './searchengines';
 
 export interface SearchEngineProxy {
-	addIncomingHeaders: [string, string][];
+	addIncomingHeaders?: [string, string][];
+	enabled: boolean;
 }
 
-export interface PreshippedTile {
+interface ComminTile {
+	proxy?: SearchEngineProxy;
+	/**
+	 * Scroll the iframe by Y pixels down on load.
+	 */
+	scrollY?: number;
+}
+
+export interface PreshippedTile extends ComminTile {
 	type: 'PRESHIPPED';
 	id: keyof typeof preShippedSearchEngines;
 }
 
-export interface CustomTile extends SearchEngine {
+export interface CustomTile extends ComminTile, SearchEngine {
 	type: 'CUSTOM';
 }
 
@@ -28,6 +29,7 @@ export type Tile = PreshippedTile | CustomTile;
 export type TileMap = Record<number, Tile>;
 
 export interface TileState {
+	author: string;
 	currentNode: MosaicNode<number> | null;
 	description: string;
 	name: string;

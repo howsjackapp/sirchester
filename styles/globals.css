@@ -77,3 +77,10 @@ iframe {
 .toast {
 	margin-right: 4rem;
 }
+
+/**
+ * Overwrite Mosaic
+ */
+.mosaic.mosaic-blueprint-theme {
+	background-color: white !important;
+}

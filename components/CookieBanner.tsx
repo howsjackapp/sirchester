@@ -57,7 +57,7 @@ export function CookieBanner({
 				delay: 999999999,
 			});
 		}
-	}, []);
+	}, [router.asPath, setToast]);
 
 	return force && showModal ? (
 		<Modal disableBackdropClick visible>

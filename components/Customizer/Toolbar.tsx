@@ -16,6 +16,7 @@ import React, { useState } from 'react';
 import {
 	COOKIE_TILE_STATE,
 	gallery,
+	getBase64,
 	getURL,
 	passQueryParams,
 	TILE_STATE_QUERY_PARAM,
@@ -46,7 +47,7 @@ export function Toolbar({
 			.push(
 				passQueryParams(router.asPath, '/search', [
 					['q', (q as string | undefined) || 'test'],
-					[TILE_STATE_QUERY_PARAM, getWipBase64(wip)],
+					[TILE_STATE_QUERY_PARAM, getBase64(wip)],
 				])
 			)
 			.then(() =>
@@ -62,7 +63,7 @@ export function Toolbar({
 											[
 												[
 													TILE_STATE_QUERY_PARAM,
-													getWipBase64(wip),
+													getBase64(wip),
 												],
 											]
 										)
@@ -108,7 +109,7 @@ export function Toolbar({
 	}
 
 	function handleShare(): void {
-		const b64 = getWipBase64(wip);
+		const b64 = getBase64(wip);
 
 		const newURL = new URL(router.asPath, getURL());
 		newURL.searchParams.set(TILE_STATE_QUERY_PARAM, b64);
@@ -208,9 +209,4 @@ function saveCookies(tileState: TileState): void {
 	setCookies(COOKIE_TILE_STATE, tileState, {
 		expires: new Date('2050-01-01'),
 	});
-}
-
-// Get the base64 encoding of the current  tile state.
-function getWipBase64(tileState: TileState): string {
-	return Buffer.from(JSON.stringify(tileState)).toString('base64');
 }

@@ -91,6 +91,25 @@ const Home: NextPage = () => {
 								Search
 							</Button>
 						</div>
+						<Spacer h={1} />
+						<div className="flex justify-center">
+							<Link
+								href={passQueryParams(
+									router.asPath,
+									'/gallery'
+								)}
+							>
+								<Button
+									disabled={loading}
+									ghost
+									loading={loading}
+									scale={0.5}
+									type="abort"
+								>
+									Or browse gallery...
+								</Button>
+							</Link>
+						</div>
 					</form>
 
 					<Spacer h={10} />

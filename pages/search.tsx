@@ -38,6 +38,7 @@ function Search({ tileState }: SearchProps): React.ReactElement | null {
 						}}
 						path={path}
 						q={q}
+						scrollY={tileState.tiles[id].scrollY}
 						tileState={tileState}
 					/>
 				)}

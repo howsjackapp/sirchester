@@ -45,6 +45,5 @@ function parseQueryParam(queryParam: ParsedUrlQuery): string | undefined {
 	}
 
 	const buf = Buffer.from(q, 'base64');
-	console.log(buf.toString('utf8'));
 	return buf.toString('utf8');
 }

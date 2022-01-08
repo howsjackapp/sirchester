@@ -10,11 +10,14 @@ interface IframeProps
 		React.IframeHTMLAttributes<HTMLIFrameElement>,
 		HTMLIFrameElement
 	> {
-	onInferredClick: (iframe: HTMLIFrameElement) => void;
+	onInferredLoad?: (iframe: HTMLIFrameElement) => void;
+	onInferredClick?: (iframe: HTMLIFrameElement) => void;
 }
 
 export function Iframe({
 	onInferredClick,
+	onInferredLoad,
+	onLoad,
 	...props
 }: IframeProps): React.ReactElement {
 	const iframeRef = useRef<null | HTMLIFrameElement>(null);
@@ -35,7 +38,7 @@ export function Iframe({
 				iframeRef.current === document.activeElement
 			) {
 				// infer a click event
-				onInferredClick(iframeRef.current);
+				onInferredClick && onInferredClick(iframeRef.current);
 			}
 		};
 
@@ -46,5 +49,16 @@ export function Iframe({
 		};
 	}, [onInferredClick]);
 
-	return <iframe {...props} ref={iframeCallbackRef} />;
+	return (
+		<iframe
+			{...props}
+			onLoad={(...args) => {
+				iframeRef.current &&
+					onInferredLoad &&
+					onInferredLoad(iframeRef.current);
+				onLoad && onLoad(...args);
+			}}
+			ref={iframeCallbackRef}
+		/>
+	);
 }
