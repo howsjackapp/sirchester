@@ -19,7 +19,7 @@ import {
 	TileState,
 } from '../util';
 import { MosaicContainer } from './Customizer/MosaicContainer';
-import styles from './gallery.module.css';
+import styles from './Gallery.module.css';
 
 export function Gallery(): React.ReactElement {
 	return (
