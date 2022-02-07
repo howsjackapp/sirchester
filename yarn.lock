@@ -1312,10 +1312,10 @@ cookie@^0.4.0:
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.4.1.tgz#afd713fe26ebd21ba95ceb61f9a8116e50a537d1"
   integrity sha512-ZwrFkGJxUR3EIoXtO+yVE69Eb7KlixbaeAWfBQB9vVsNn/o+Yw69gBWSSDK825hQNdN+wF8zELf3dFNl/kxkUA==
 
-cookies-next@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/cookies-next/-/cookies-next-2.0.3.tgz#b682836ee6813325782d528a54b54f71f8e9fac0"
-  integrity sha512-sgYc9YxR7eTbZ1ifYhHbwMCVau/deXGx2rhQoIsq3otR+mf1ZfsvMbilS0BzWhk0s1TyOVWalNE7JcaiZfwsGQ==
+cookies-next@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/cookies-next/-/cookies-next-2.0.4.tgz#d6a876c6957c856678fa06222877ebbbca32ce0e"
+  integrity sha512-fqjwJNksW/WEu8ou1SEXJCKYyg7nrQRsjlfbIF5tp96SrQq1Fzome1To27tPxhoPN/vgFuzCt573Pri9bE+H+g==
   dependencies:
     "@types/cookie" "^0.4.1"
     "@types/node" "^16.10.2"
