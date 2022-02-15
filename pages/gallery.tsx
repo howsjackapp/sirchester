@@ -2,14 +2,7 @@ import { Page } from '@geist-ui/react';
 import Head from 'next/head';
 import React from 'react';
 
-import {
-	Chat,
-	CookieBanner,
-	Footer,
-	Gallery,
-	GithubBanner,
-	Nav,
-} from '../components';
+import { Chat, Footer, Gallery, GithubBanner, Nav } from '../components';
 import { tilesGetServerSideProps } from '../util';
 
 export const getServerSideProps = tilesGetServerSideProps;
@@ -23,7 +16,6 @@ function GalleryPage(): React.ReactElement {
 
 			<GithubBanner />
 			<Chat />
-			<CookieBanner />
 
 			<Nav />
 			<Page>

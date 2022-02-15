@@ -2,7 +2,13 @@ import { Loading } from '@geist-ui/react';
 import React, { useEffect, useState } from 'react';
 import { MosaicBranch, MosaicWindow } from 'react-mosaic-component';
 
-import { getSearchEngine, getTileName, Tile, TileState } from '../util';
+import {
+	getSearchEngine,
+	getTileName,
+	SearchEngineProxy,
+	Tile,
+	TileState,
+} from '../util';
 import { Iframe } from './Iframe';
 
 export interface TileProps {
@@ -20,7 +26,7 @@ export interface TileProps {
 	tileState: TileState;
 }
 
-export function Tile({
+export function SearchTile({
 	id,
 	onIframeClick,
 	path,
@@ -45,6 +51,12 @@ export function Tile({
 			<Iframe
 				className={`full-width full-height ${loading ? 'hide' : ''}`}
 				onInferredClick={onIframeClick}
+				onInferredLoad={(el) => {
+					console.log('SCROLLING by ', scrollY, 'on ', id);
+					el.contentDocument?.documentElement.scrollBy({
+						top: scrollY,
+					});
+				}}
 				src={getIframeUrl(tileState.tiles[id], q)}
 			/>
 		</MosaicWindow>
@@ -67,10 +79,37 @@ function getIframeUrl(tile: Tile, query: string): string {
 	}
 
 	if (tile.proxy) {
-		return `${
-			process.env.NEXT_PUBLIC_PROXY_URL
-		}/?__sirchester_target=${encodeURIComponent(url)}`;
+		return `${getProxyUrl(
+			tile.proxy,
+			url
+		)}/?__sirchester_target=${encodeURIComponent(url)}`;
 	}
 
 	return url;
+}
+
+function getProxyUrl(proxy: SearchEngineProxy, targetUrl: string): string {
+	if (proxy.hostname !== 'SIRCHESTER') {
+		return proxy.hostname;
+	}
+
+	// If the proxy hostname is "SIRCHESTER", we actually provide proxies for
+	// some search engines. These proxies allow embedding in iframes.
+	// See https://github.com/SirChesterApp/proxy.
+	if (targetUrl.startsWith('https://google.com')) {
+		return 'https://google.sirchester.app';
+	}
+	if (targetUrl.startsWith('https://startpage.com')) {
+		return 'https://sp.sirchester.app';
+	}
+	if (targetUrl.startsWith('https://duckduckgo.com')) {
+		return 'https://ddg.sirchester.app';
+	}
+	if (targetUrl.startsWith('https://search.marginalia.nu')) {
+		return 'https://marginalia.sirchester.app';
+	}
+
+	throw new Error(
+		`No proxy currently supported for ${targetUrl}. Please raise an issue on https://github.com/SirChesterApp/proxy.`
+	);
 }

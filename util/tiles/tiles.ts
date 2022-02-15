@@ -4,10 +4,22 @@ import { preShippedSearchEngines, SearchEngine } from './searchengines';
 
 export interface SearchEngineProxy {
 	addIncomingHeaders?: [string, string][];
-	enabled: boolean;
+	/**
+	 * Hostname of the proxy, e.g. `https://me:mypassword@myproxy.com:9005`.
+	 * You can also pass "SIRCHESTER", in which case we'll use our own proxies.
+	 */
+	hostname: string | 'SIRCHESTER';
 }
 
-interface ComminTile {
+interface CommonTile {
+	/**
+	 * Optional string to append to the search query. For example, putting
+	 * "reddit" here will result in all queries with "reddit" appended.
+	 */
+	append?: string;
+	/**
+	 * Optional proxy to use to access the underlying search page.
+	 */
 	proxy?: SearchEngineProxy;
 	/**
 	 * Scroll the iframe by Y pixels down on load.
@@ -15,12 +27,12 @@ interface ComminTile {
 	scrollY?: number;
 }
 
-export interface PreshippedTile extends ComminTile {
+export interface PreshippedTile extends CommonTile {
 	type: 'PRESHIPPED';
 	id: keyof typeof preShippedSearchEngines;
 }
 
-export interface CustomTile extends ComminTile, SearchEngine {
+export interface CustomTile extends CommonTile, SearchEngine {
 	type: 'CUSTOM';
 }
 

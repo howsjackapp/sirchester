@@ -1,0 +1,25 @@
+{
+	"author": "amaurym",
+	"currentNode": {
+		"direction": "row",
+		"first": 0,
+		"second": {
+			"direction": "column",
+			"first": 1,
+			"second": 2,
+			"splitPercentage": 50
+		},
+		"splitPercentage": 60
+	},
+	"description": "Left tile is Google, right has 2 smaller tiles with Google+reddit and DDG",
+	"name": "Google | (Reddit / DDG)",
+	"tiles": {
+		"0": { "type": "PRESHIPPED", "id": "google" },
+		"1": { "type": "PRESHIPPED", "id": "google", "append": "reddit" },
+		"2": {
+			"type": "PRESHIPPED",
+			"id": "ddg",
+			"proxy": { "hostname": "SIRCHESTER" }
+		}
+	}
+}

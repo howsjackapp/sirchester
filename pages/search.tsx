@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { Mosaic } from 'react-mosaic-component';
 
-import { CookieBanner, Fab, SizeGuard, Tile } from '../components';
+import { Fab, SearchTile, SizeGuard } from '../components';
 import { PropsWithTileState, tilesGetServerSideProps } from '../util';
 
 export const getServerSideProps = tilesGetServerSideProps;
@@ -25,13 +25,12 @@ function Search({ tileState }: SearchProps): React.ReactElement | null {
 				<title>{q} - Sir Chester</title>
 			</Head>
 
-			<CookieBanner force />
 			<SizeGuard />
 			<Fab q={q} open={open} onOpen={setOpen} />
 
 			<Mosaic<number>
 				renderTile={(id, path) => (
-					<Tile
+					<SearchTile
 						id={id}
 						onIframeClick={() => {
 							setOpen(false);

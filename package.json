@@ -8,7 +8,7 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "tsc --noEmit && eslint . --ext js,ts,tsx"
+		"lint": "tsc --noEmit && eslint . --ext js,ts,tsx,json"
 	},
 	"dependencies": {
 		"@blueprintjs/core": "^3.52.0",

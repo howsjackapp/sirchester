@@ -1,5 +1,5 @@
-.eslintrc.js
-next.config.js
+/*.json
+/*.js
 **/coverage/*
 **/lib/*
 **/node_modules/*

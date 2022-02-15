@@ -127,7 +127,11 @@ export const MosaicContainer: FC<MosaicContainerProps> = ({
 
 							<Description
 								title={searchEngine.name}
-								content={searchEngine.description}
+								content={`${searchEngine.description}${
+									tile.append
+										? ` Append "${tile.append}".`
+										: ''
+								}`}
 							/>
 
 							{setWip && (

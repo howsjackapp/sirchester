@@ -7,4 +7,4 @@ export * from './Gallery';
 export * from './GithubBanner';
 export * from './Nav';
 export * from './SizeGuard';
-export * from './Tile';
+export * from './SearchTile';

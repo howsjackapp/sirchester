@@ -15,7 +15,7 @@ import NextImage from 'next/image';
 import { useRouter } from 'next/router';
 import React, { FormEventHandler, useState } from 'react';
 
-import { Chat, CookieBanner, Footer, GithubBanner } from '../components';
+import { Chat, Footer, GithubBanner } from '../components';
 import { passQueryParams, tilesGetServerSideProps } from '../util';
 import styles from './index.module.css';
 
@@ -50,7 +50,6 @@ const Home: NextPage = () => {
 
 			<GithubBanner />
 			<Chat />
-			<CookieBanner />
 
 			<Page className="container">
 				<Page.Content>
@@ -190,15 +189,15 @@ const Home: NextPage = () => {
 						>
 							@hidden-spyder
 						</Link>{' '}
-						and{' '}
+						and this recent post called{' '}
 						<Link
 							color
-							href="https://news.ycombinator.com/item?id=28903723"
+							href="https://dkb.io/post/google-search-is-dying"
 							icon
 							target="_blank"
 							rel="noreferrer"
 						>
-							@hihihihi1234
+							Google Search is Dying
 						</Link>
 						.
 					</p>

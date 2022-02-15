@@ -4,12 +4,11 @@ import {
 	Grid,
 	GridProps,
 	Text,
-	Textarea,
 	useToasts,
 } from '@geist-ui/react';
 import { Eye } from '@geist-ui/react-icons';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React from 'react';
 
 import {
 	gallery,
@@ -29,25 +28,21 @@ export function Gallery(): React.ReactElement {
 
 				return <GalleryCard key={k} tileState={tileState} />;
 			})}
-			<GalleryCard customizable tileState={gallery.ddgTrio} />
 		</Grid.Container>
 	);
 }
 
 interface GalleryCardProps extends GridProps {
-	customizable?: boolean;
 	tileState: TileState;
 }
 
 export function GalleryCard({
-	customizable,
 	tileState,
 	...rest
 }: GalleryCardProps): React.ReactElement {
 	const router = useRouter();
 	const { q } = router.query;
 	const [, setToast] = useToasts();
-	const [wip, setWip] = useState(JSON.stringify(tileState, undefined, '  '));
 
 	function handlePreview(tileState: TileState) {
 		return function () {
@@ -97,32 +92,18 @@ export function GalleryCard({
 	return (
 		<Grid xs={24} sm={12} lg={8} {...rest}>
 			<Card>
-				<Text h4>
-					{customizable ? 'Customize your own' : tileState.name}
-				</Text>
+				<Text h4>{tileState.name}</Text>
 				<div className={styles.mosaic}>
-					{customizable ? (
-						<Textarea
-							height="100%"
-							onChange={(e) => setWip(e.target.value)}
-							value={wip}
-						/>
-					) : (
-						<MosaicContainer tileState={tileState} />
-					)}
+					<MosaicContainer tileState={tileState} />
 				</div>
 
 				<Text type="secondary" small>
-					{customizable
-						? 'This is an advanced feature.'
-						: `By @${tileState.author}. ${tileState.description}`}
+					By @{tileState.author}. {tileState.description}
 				</Text>
 				<Card.Footer>
 					<Button
 						icon={<Eye />}
-						onClick={handlePreview(
-							customizable ? JSON.parse(wip) : tileState
-						)}
+						onClick={handlePreview(tileState)}
 						type="success"
 					>
 						Preview

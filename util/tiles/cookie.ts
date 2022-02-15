@@ -26,7 +26,7 @@ export const tilesGetServerSideProps: GetServerSideProps = async (context) => {
 
 	const tileState = tileStateStr
 		? (JSON.parse(tileStateStr) as TileState)
-		: gallery.ddgTrio;
+		: gallery.google_reddit_ddg;
 
 	return {
 		props: { tileState },
