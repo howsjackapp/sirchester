@@ -42,8 +42,8 @@ function popoverContentWithQ(
 				</Link>
 			</Popover.Item>
 			<Popover.Item>
-				<Link href={passQueryParams(path, '/customize', [['q', q]])}>
-					Customize search
+				<Link href={passQueryParams(path, '/gallery', [['q', q]])}>
+					Change settings
 				</Link>
 			</Popover.Item>
 		</>

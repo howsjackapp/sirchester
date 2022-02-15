@@ -1,0 +1,35 @@
+{
+	"author": "amaurym",
+	"currentNode": {
+		"direction": "row",
+		"first": 0,
+		"second": {
+			"direction": "column",
+			"first": 1,
+			"second": 2,
+			"splitPercentage": 50
+		},
+		"splitPercentage": 60
+	},
+	"description": "Startpage on the left, \"reddit\" and marginalia on the right",
+	"name": "Startpage | (Reddit / Marginalia)",
+	"tiles": {
+		"0": {
+			"type": "PRESHIPPED",
+			"id": "startpage",
+			"proxy": { "hostname": "SIRCHESTER" }
+		},
+		"1": {
+			"append": "reddit",
+			"type": "PRESHIPPED",
+			"id": "startpage",
+			"proxy": { "hostname": "SIRCHESTER" }
+		},
+		"2": {
+			"type": "PRESHIPPED",
+			"id": "marginalia",
+			"proxy": { "hostname": "SIRCHESTER" },
+			"scrollY": 100
+		}
+	}
+}

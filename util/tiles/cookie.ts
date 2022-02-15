@@ -26,7 +26,7 @@ export const tilesGetServerSideProps: GetServerSideProps = async (context) => {
 
 	const tileState = tileStateStr
 		? (JSON.parse(tileStateStr) as TileState)
-		: gallery.ddgTrio;
+		: gallery.google_reddit_ddg;
 
 	return {
 		props: { tileState },
@@ -45,6 +45,5 @@ function parseQueryParam(queryParam: ParsedUrlQuery): string | undefined {
 	}
 
 	const buf = Buffer.from(q, 'base64');
-	console.log(buf.toString('utf8'));
 	return buf.toString('utf8');
 }

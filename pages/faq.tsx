@@ -34,9 +34,7 @@ function Faq(): React.ReactElement {
 					<p>
 						Sir Chester saves your search engine preferences in a
 						cookie. When you{' '}
-						<Link
-							href={passQueryParams(router.asPath, '/customize')}
-						>
+						<Link href={passQueryParams(router.asPath, '/gallery')}>
 							customize
 						</Link>{' '}
 						the search engine layout and click on &quot;Save as

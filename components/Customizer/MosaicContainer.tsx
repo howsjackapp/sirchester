@@ -25,23 +25,34 @@ import {
 	TileMap,
 	TileState,
 } from '../../util';
+import styles from './MosaicContainer.module.css';
 
 const l = debug('sirchester:customize');
 
 interface MosaicContainerProps {
-	setWip: (wip: TileState) => void;
-	wip: TileState;
+	/**
+	 * Set to true to make the mosaic customizable.
+	 */
+	setWip?: (wip: TileState) => void;
+	tileState: TileState;
 }
 
-export const MosaicContainer: FC<MosaicContainerProps> = ({ setWip, wip }) => {
+export const MosaicContainer: FC<MosaicContainerProps> = ({
+	setWip,
+	tileState,
+}) => {
 	function handleChangeTile(leafId: number) {
 		return function (newValue: string | string[]): void {
+			if (!setWip) {
+				throw new Error('setWip must be set for handleChangeTile.');
+			}
+
 			const v = newValue as keyof typeof preShippedSearchEngines;
 			if (preShippedSearchEngines[v]) {
 				setWip({
-					...wip,
+					...tileState,
 					tiles: {
-						...wip?.tiles,
+						...tileState?.tiles,
 						[leafId]: { type: 'PRESHIPPED', id: v },
 					},
 				});
@@ -54,12 +65,16 @@ export const MosaicContainer: FC<MosaicContainerProps> = ({ setWip, wip }) => {
 	}
 
 	function handleCreateNode(): number {
-		const id = getNextId(wip.tiles);
+		if (!setWip) {
+			throw new Error('setWip must be set for handleCreateNode.');
+		}
+
+		const id = getNextId(tileState.tiles);
 		l('Creating new tile with id=%d', id);
 		setWip({
-			...wip,
+			...tileState,
 			tiles: {
-				...wip.tiles,
+				...tileState.tiles,
 				[id]: { type: 'PRESHIPPED', id: 'google' },
 			},
 		});
@@ -70,60 +85,73 @@ export const MosaicContainer: FC<MosaicContainerProps> = ({ setWip, wip }) => {
 
 	return (
 		<Mosaic<number>
-			onChange={(newNode) => {
-				if (newNode) {
-					const cleaned = cleanWip(newNode, wip);
-					setWip(cleaned);
-				}
-			}}
+			onChange={
+				setWip &&
+				((newNode) => {
+					if (newNode) {
+						const cleaned = cleanWip(newNode, tileState);
+						setWip(cleaned);
+					}
+				})
+			}
 			renderTile={(id, path) => {
-				const tile = wip.tiles[id];
+				const tile = tileState.tiles[id];
 				const searchEngine = getSearchEngine(tile);
 
 				return (
 					<MosaicWindow<number>
-						createNode={handleCreateNode}
+						createNode={setWip && handleCreateNode}
+						draggable={!!setWip}
 						path={path}
 						toolbarControls={
-							<>
-								<SplitButton />
-								<RemoveButton />
-							</>
+							setWip ? (
+								<>
+									<SplitButton />
+									<RemoveButton />
+								</>
+							) : (
+								<></>
+							)
 						}
 						title={getTileName(tile)}
 					>
-						<Spacer />
-						<Card className="margin-auto" width="400px">
-							<Image
-								height="200px"
-								src={
-									searchEngine.image ||
-									'https://user-images.githubusercontent.com/11304944/76085431-fd036480-5fec-11ea-8412-9e581425344a.png'
-								}
-								draggable={false}
-							/>
+						<Card height="100%" width="100%">
+							<div className={styles.image}>
+								<Image
+									src={searchEngine.image}
+									draggable={false}
+								/>
+							</div>
+
+							<Spacer h={1} />
 
 							<Description
 								title={searchEngine.name}
-								content={searchEngine.description}
+								content={`${searchEngine.description}${
+									tile.append
+										? ` Append "${tile.append}".`
+										: ''
+								}`}
 							/>
 
-							<Card.Footer>
-								<Text type="secondary" small>
-									Choose another:
-								</Text>
-								<Select
-									onChange={handleChangeTile(id)}
-									placeholder="Choose one"
-									value={
-										isPreshippedTile(tile)
-											? tile.id
-											: 'custom'
-									}
-									width="100%"
-								>
-									{Object.keys(preShippedSearchEngines).map(
-										(k) => (
+							{setWip && (
+								<Card.Footer>
+									<Text type="secondary" small>
+										Choose another:
+									</Text>
+									<Select
+										onChange={handleChangeTile(id)}
+										placeholder="Choose one"
+										value={
+											isPreshippedTile(tile)
+												? tile.id
+												: 'custom'
+										}
+										width="100%"
+									>
+										{Object.keys(
+											preShippedSearchEngines
+										).map((k) => (
 											<Select.Option key={k} value={k}>
 												{
 													preShippedSearchEngines[
@@ -131,18 +159,20 @@ export const MosaicContainer: FC<MosaicContainerProps> = ({ setWip, wip }) => {
 													].name
 												}
 											</Select.Option>
-										)
-									)}
-									<Select.Option disabled value="custom">
-										Custom Search Engine (Coming soon...)
-									</Select.Option>
-								</Select>
-							</Card.Footer>
+										))}
+										<Select.Option disabled value="custom">
+											Custom Search Engine (Coming
+											soon...)
+										</Select.Option>
+									</Select>
+								</Card.Footer>
+							)}
 						</Card>
 					</MosaicWindow>
 				);
 			}}
-			value={wip.currentNode}
+			resize={setWip ? undefined : 'DISABLED'}
+			value={tileState.currentNode}
 		/>
 	);
 };

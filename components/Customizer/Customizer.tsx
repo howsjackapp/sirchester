@@ -18,7 +18,7 @@ export const Customizer: FC<CustomizerProps> = ({ initialTileState }) => {
 				setWip={setWip}
 				wip={wip}
 			/>
-			<MosaicContainer setWip={setWip} wip={wip} />
+			<MosaicContainer setWip={setWip} tileState={wip} />
 		</>
 	);
 };

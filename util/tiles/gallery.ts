@@ -1,67 +1,17 @@
+import google_ddg from '../../gallery/google_ddg.json';
+import google_reddit_ddg from '../../gallery/google_reddit_ddg.json';
+import sp_reddit_marginalia from '../../gallery/sp_reddit_marginalia.json';
 import type { TileState } from './tiles';
 
+/**
+ * gallery contains the TileStates pre-shipped by Sir Chester. They are
+ * displayed in the /gallery page.
+ *
+ * If you would like to add a TileState, please create a PR:
+ * https://github.com/sirchesterapp/webapp
+ */
 export const gallery: Record<string, TileState> = {
-	ddgTrio: {
-		currentNode: {
-			direction: 'row',
-			first: 0,
-			second: {
-				direction: 'column',
-				first: 1,
-				second: 2,
-				splitPercentage: 50,
-			},
-			splitPercentage: 60,
-		},
-		description:
-			'Three tiles with DuckDuckGo default search, with "reddit" and with "hacker news"',
-		name: 'DuckDuckGo Trio',
-		tiles: {
-			0: { type: 'PRESHIPPED', id: 'ddg' },
-			1: { type: 'PRESHIPPED', id: 'ddgReddit' },
-			2: { type: 'PRESHIPPED', id: 'ddgHn' },
-		},
-	},
-	googleTrio: {
-		currentNode: {
-			direction: 'row',
-			first: 0,
-			second: {
-				direction: 'column',
-				first: 1,
-				second: 2,
-				splitPercentage: 50,
-			},
-			splitPercentage: 60,
-		},
-		description:
-			'Three tiles with Google default search, with "reddit" and with "hacker news"',
-		name: 'Google Trio',
-		tiles: {
-			0: { type: 'PRESHIPPED', id: 'google' },
-			1: { type: 'PRESHIPPED', id: 'googleReddit' },
-			2: { type: 'PRESHIPPED', id: 'googleHn' },
-		},
-	},
-	startpageTrio: {
-		currentNode: {
-			direction: 'row',
-			first: 0,
-			second: {
-				direction: 'column',
-				first: 1,
-				second: 2,
-				splitPercentage: 50,
-			},
-			splitPercentage: 60,
-		},
-		description:
-			'Three tiles with Startpage default search, with "reddit" and with "hacker news"',
-		name: 'Startpage Trio',
-		tiles: {
-			0: { type: 'PRESHIPPED', id: 'startpage' },
-			1: { type: 'PRESHIPPED', id: 'startpageReddit' },
-			2: { type: 'PRESHIPPED', id: 'startpageHn' },
-		},
-	},
+	google_ddg: google_ddg as TileState,
+	google_reddit_ddg: google_reddit_ddg as TileState,
+	sp_reddit_marginalia: sp_reddit_marginalia as TileState,
 };

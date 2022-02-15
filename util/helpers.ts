@@ -1,3 +1,5 @@
+import type { TileState } from './tiles';
+
 // Gets the currently deployed URL.
 export function getURL(): string {
 	const url =
@@ -32,4 +34,14 @@ export function passQueryParams(
 	removeQueryParams?.forEach((k) => u.searchParams.delete(k));
 
 	return `${to}${u.search}`;
+}
+
+/**
+ * Get the base64 encoding of the given tile state.
+ *
+ * @param tileState - The tile state to encode.
+ * @returns Base64 string.
+ */
+export function getBase64(tileState: TileState): string {
+	return Buffer.from(JSON.stringify(tileState)).toString('base64');
 }
