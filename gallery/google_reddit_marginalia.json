@@ -11,8 +11,8 @@
 		},
 		"splitPercentage": 60
 	},
-	"description": "Left tile is Google, right has 2 smaller tiles with Google+reddit and DDG",
-	"name": "Google | (Reddit / DDG)",
+	"description": "Google on the left, \"reddit\" and marginalia on the right",
+	"name": "Google | (Reddit / Marginalia)",
 	"tiles": {
 		"0": {
 			"type": "PRESHIPPED",
@@ -20,15 +20,16 @@
 			"proxy": { "hostname": "SIRCHESTER_PROXY" }
 		},
 		"1": {
+			"append": "reddit",
 			"type": "PRESHIPPED",
 			"id": "google",
-			"append": "reddit",
 			"proxy": { "hostname": "SIRCHESTER_PROXY" }
 		},
 		"2": {
 			"type": "PRESHIPPED",
-			"id": "ddg",
-			"proxy": { "hostname": "SIRCHESTER_PROXY" }
+			"id": "marginalia",
+			"proxy": { "hostname": "SIRCHESTER_PROXY" },
+			"scrollY": 100
 		}
 	}
 }
