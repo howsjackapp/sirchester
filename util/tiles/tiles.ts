@@ -6,9 +6,10 @@ export interface SearchEngineProxy {
 	addIncomingHeaders?: [string, string][];
 	/**
 	 * Hostname of the proxy, e.g. `https://me:mypassword@myproxy.com:9005`.
-	 * You can also pass "SIRCHESTER", in which case we'll use our own proxies.
+	 * You can also pass "SIRCHESTER_PROXY", in which case we'll use our one of
+	 * our own proxies we maintain.
 	 */
-	hostname: string | 'SIRCHESTER';
+	hostname: string | 'SIRCHESTER_PROXY';
 }
 
 interface CommonTile {

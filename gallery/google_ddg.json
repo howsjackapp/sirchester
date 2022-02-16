@@ -9,11 +9,15 @@
 	"description": "Screen split in half, Google and DDG",
 	"name": "Google | DDG",
 	"tiles": {
-		"0": { "type": "PRESHIPPED", "id": "google" },
+		"0": {
+			"type": "PRESHIPPED",
+			"id": "google",
+			"proxy": { "hostname": "SIRCHESTER_PROXY" }
+		},
 		"1": {
 			"type": "PRESHIPPED",
 			"id": "ddg",
-			"proxy": { "hostname": "SIRCHESTER" }
+			"proxy": { "hostname": "SIRCHESTER_PROXY" }
 		}
 	}
 }

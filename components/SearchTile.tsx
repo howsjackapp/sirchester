@@ -68,7 +68,8 @@ export function SearchTile({
  */
 function getIframeUrl(tile: Tile, query: string): string {
 	const se = getSearchEngine(tile);
-	const url = se.searchString?.replace(/%s/g, query);
+	const finalQuery = tile.append ? `${query} ${tile.append}` : query;
+	const url = se.searchString?.replace(/%s/g, finalQuery);
 
 	if (!url) {
 		throw new Error('url is empty in getIframeUrl');
@@ -79,37 +80,16 @@ function getIframeUrl(tile: Tile, query: string): string {
 	}
 
 	if (tile.proxy) {
-		return `${getProxyUrl(
-			tile.proxy,
-			url
-		)}/?__sirchester_target=${encodeURIComponent(url)}`;
+		return `${getProxyUrl(tile.proxy)}${url}`;
 	}
 
 	return url;
 }
 
-function getProxyUrl(proxy: SearchEngineProxy, targetUrl: string): string {
-	if (proxy.hostname !== 'SIRCHESTER') {
-		return proxy.hostname;
+function getProxyUrl(proxy: SearchEngineProxy): string {
+	if (proxy.hostname === 'SIRCHESTER_PROXY') {
+		return 'https://sirchester-proxy.herokuapp.com/';
 	}
 
-	// If the proxy hostname is "SIRCHESTER", we actually provide proxies for
-	// some search engines. These proxies allow embedding in iframes.
-	// See https://github.com/SirChesterApp/proxy.
-	if (targetUrl.startsWith('https://google.com')) {
-		return 'https://google.sirchester.app';
-	}
-	if (targetUrl.startsWith('https://startpage.com')) {
-		return 'https://sp.sirchester.app';
-	}
-	if (targetUrl.startsWith('https://duckduckgo.com')) {
-		return 'https://ddg.sirchester.app';
-	}
-	if (targetUrl.startsWith('https://search.marginalia.nu')) {
-		return 'https://marginalia.sirchester.app';
-	}
-
-	throw new Error(
-		`No proxy currently supported for ${targetUrl}. Please raise an issue on https://github.com/SirChesterApp/proxy.`
-	);
+	return proxy.hostname;
 }

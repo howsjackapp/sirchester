@@ -6,8 +6,8 @@ import { gallery } from './gallery';
 import { TileState } from './tiles';
 
 export const COOKIE_TILE_STATE = 'sirchester_tile_state';
-
 export const TILE_STATE_QUERY_PARAM = 'tile_state';
+const DEFAULT_TILE_STATE = 'google_reddit_marginalia';
 
 export interface PropsWithTileState {
 	tileState: TileState;
@@ -26,7 +26,7 @@ export const tilesGetServerSideProps: GetServerSideProps = async (context) => {
 
 	const tileState = tileStateStr
 		? (JSON.parse(tileStateStr) as TileState)
-		: gallery.google_reddit_ddg;
+		: gallery[DEFAULT_TILE_STATE];
 
 	return {
 		props: { tileState },

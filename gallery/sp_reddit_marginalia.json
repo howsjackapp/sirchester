@@ -17,18 +17,18 @@
 		"0": {
 			"type": "PRESHIPPED",
 			"id": "startpage",
-			"proxy": { "hostname": "SIRCHESTER" }
+			"proxy": { "hostname": "SIRCHESTER_PROXY" }
 		},
 		"1": {
 			"append": "reddit",
 			"type": "PRESHIPPED",
 			"id": "startpage",
-			"proxy": { "hostname": "SIRCHESTER" }
+			"proxy": { "hostname": "SIRCHESTER_PROXY" }
 		},
 		"2": {
 			"type": "PRESHIPPED",
 			"id": "marginalia",
-			"proxy": { "hostname": "SIRCHESTER" },
+			"proxy": { "hostname": "SIRCHESTER_PROXY" },
 			"scrollY": 100
 		}
 	}
