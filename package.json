@@ -11,7 +11,7 @@
 		"lint": "tsc --noEmit && eslint . --ext js,ts,tsx,json"
 	},
 	"dependencies": {
-		"@blueprintjs/core": "^3.53.0",
+		"@blueprintjs/core": "^4.14.1",
 		"@blueprintjs/icons": "^3.32.0",
 		"@geist-ui/react": "^2.2.5",
 		"@geist-ui/react-icons": "^1.0.1",
