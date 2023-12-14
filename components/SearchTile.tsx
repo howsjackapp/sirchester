@@ -75,10 +75,6 @@ function getIframeUrl(tile: Tile, query: string): string {
 		throw new Error('url is empty in getIframeUrl');
 	}
 
-	if (!process.env.NEXT_PUBLIC_PROXY_URL) {
-		throw new Error('url is empty in getIframeUrl');
-	}
-
 	if (tile.proxy) {
 		return `${getProxyUrl(tile.proxy)}${url}`;
 	}

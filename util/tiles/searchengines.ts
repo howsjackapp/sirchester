@@ -16,11 +16,11 @@ export const preShippedSearchEngines = {
 		description: 'You know Google.',
 		image: '/searchengines/google.svg',
 		name: 'Google',
-		searchString: 'https://google.com/search?igu=1&q=%s',
+		searchString: 'https://www.google.com/search?igu=1&ei=&q=%s',
 	},
 	marginalia: {
 		description: 'Indie search engine, favors text-heavy websites.',
-		image: '/searchengines/google.svg',
+		image: '/searchengines/marginalia.png',
 		name: 'Marginalia',
 		searchString: 'https://search.marginalia.nu/search?query=%s',
 	},

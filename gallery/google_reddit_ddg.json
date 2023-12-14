@@ -16,19 +16,16 @@
 	"tiles": {
 		"0": {
 			"type": "PRESHIPPED",
-			"id": "google",
-			"proxy": { "hostname": "SIRCHESTER_PROXY" }
+			"id": "google"
 		},
 		"1": {
 			"type": "PRESHIPPED",
 			"id": "google",
-			"append": "reddit",
-			"proxy": { "hostname": "SIRCHESTER_PROXY" }
+			"append": "reddit"
 		},
 		"2": {
 			"type": "PRESHIPPED",
-			"id": "ddg",
-			"proxy": { "hostname": "SIRCHESTER_PROXY" }
+			"id": "ddg"
 		}
 	}
 }

@@ -118,7 +118,7 @@ const Home: NextPage = () => {
 						shadow
 					>
 						<Image.Browser
-							url="https://sirchester.app/search?q=burger paris"
+							url="https://sirchester.vercel.app/search?q=burger paris"
 							anchorProps={{ rel: 'nofollow' }}
 						>
 							<Image src="/screenshot-best-burger-paris.png" />

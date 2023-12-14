@@ -1,4 +1,4 @@
-# Sir Chester, https://sirchester.app
+# Sir Chester, https://sirchester.vercel.app
 
 Append 'reddit' or 'hacker news' to your search queries.
 
