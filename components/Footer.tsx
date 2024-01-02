@@ -21,7 +21,7 @@ export function Footer(): React.ReactElement {
 					. Our business model is{' '}
 					<Link
 						color
-						href="https://github.com/sponsors/amaurym"
+						href="https://github.com/sponsors/storm1729"
 						icon
 						target="_blank"
 						rel="noreferrer"
@@ -34,12 +34,12 @@ export function Footer(): React.ReactElement {
 					Copyright{' '}
 					<Link
 						color
-						href="https://github.com/amaurym"
+						href="https://github.com/storm1729"
 						icon
 						target="_blank"
 						rel="noreferrer"
 					>
-						@amaurym
+						@storm1729
 					</Link>{' '}
 					2022.
 					<br />
